@@ -10,13 +10,26 @@ function openFileInTextEditor(dir, rel_path) {
 }
 
 function setProject(dir) {
-    var dircontents = fs.readdirSync(dir);
-    var fileselect = document.querySelector("#fileselect");
-    for (var file of dircontents) { // can't handle nested folder yet
-        var option = document.createElement("option");
-        option.innerText = file;
-        fileselect.appendChild(option);
-    }
+    var recursion = function(directory, optgroup) {
+        var dircontents = fs.readdirSync(directory);
+        for (var file of dircontents) {
+            if (fs.lstatSync(directory + "/" + file).isDirectory()) {
+                if (file != ".git") {
+                    var newOptGroup = document.createElement("optgroup");
+                    newOptGroup.setAttribute("label", file);
+                    optgroup.appendChild(newOptGroup);
+                    recursion(directory + "/" + file, newOptGroup);
+                }
+            }
+            else {
+                var option = document.createElement("option");
+                option.innerText = file;
+                optgroup.appendChild(option);
+            }
+        }
+    };
+
+    recursion(dir, document.querySelector("#fileselect"));
 
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
