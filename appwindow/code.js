@@ -3,6 +3,12 @@ const fs = require("fs");
 const { dialog } = remote;
 
 var projectdirectory = "";
+
+function openFileInTextEditor(dir, rel_path) {
+    var textarea = document.querySelector("#texteditor");
+    textarea.value = fs.readFileSync(dir + "/" + rel_path);
+}
+
 function setProject(dir) {
     var dircontents = fs.readdirSync(dir);
     var fileselect = document.querySelector("#fileselect");
@@ -11,6 +17,9 @@ function setProject(dir) {
         option.innerText = file;
         fileselect.appendChild(option);
     }
+
+    fileselect.value = "index.html";
+    openFileInTextEditor(dir, "index.html");
 
     document.querySelector("#pagepreview").src = "file://" + dir + "/index.html";
     document.querySelector("#addressbar").value = "file://" + dir + "/index.html";
@@ -37,4 +46,8 @@ document.querySelector("#reloadbutton").addEventListener("click", function() {
 
 document.querySelector("#devtoolsbutton").addEventListener("click", function() {
     document.querySelector("#pagepreview").openDevTools();
+});
+
+document.querySelector("#fileselect").addEventListener("change", function() {
+    openFileInTextEditor(projectdirectory, this.value);
 });
