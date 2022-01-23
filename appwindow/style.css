@@ -30,4 +30,5 @@ body {
 #texteditor {
     width: 100%;
     height: 90%;
+    resize: none;
 }
