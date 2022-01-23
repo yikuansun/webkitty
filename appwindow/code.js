@@ -10,7 +10,14 @@ function setProject(dir) {
         var option = document.createElement("option");
         option.innerText = file;
         fileselect.appendChild(option);
+
+        if (file.split(".")[file.split(".").length - 1].toLowerCase() == "html") {
+            document.querySelector("#previewselect").appendChild(option);
+        }
     }
+
+    document.querySelector("#pagepreview").src = "file://" + dir + "/index.html";
+    document.querySelector("#previewselect").value = "index.html";
 }
 
 document.querySelector("#projectselect").addEventListener("click", function() {

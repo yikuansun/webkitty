@@ -32,3 +32,19 @@ body {
     height: 90%;
     resize: none;
 }
+
+#rightsection {
+    width: 50vw;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    left: 50vw;
+    top: 0;
+}
+
+#pagepreview {
+    width: 100%;
+    height: calc(100% - 100px);
+}
