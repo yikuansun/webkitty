@@ -1,9 +1,29 @@
 :root {
     --background-color: #222222;
+    --ui-primary-color: whitesmoke;
+    --ui-secondary-color: #161616;
 }
 
 body {
     background-color: var(--background-color);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    opacity: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #80808069;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #80808042;
+    background-clip: padding-box;
 }
 
 #landingscreen {
@@ -37,6 +57,12 @@ body {
     width: 100%;
     height: 100%;
     resize: none;
+    background-color: var(--ui-secondary-color);
+    color: var(--ui-primary-color);
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+    outline: none!important;
 }
 
 #rightsection {
@@ -53,6 +79,9 @@ body {
 #pagepreview {
     width: 100%;
     height: 100%;
+    background-color: white;
+    border: 0.3px var(--ui-primary-color) solid;
+    box-sizing: border-box;
 }
 
 #browsertopbar {
@@ -63,4 +92,16 @@ body {
 #addressbar {
     width: 100%;
     box-sizing: border-box;
+    background-color: var(--ui-secondary-color);
+    color: var(--ui-primary-color);
+}
+
+#reloadbutton, #savebutton, #devtoolsbutton {
+    background-color: var(--ui-secondary-color);
+    color: var(--ui-primary-color);
+}
+
+#fileselect {
+    background-color: var(--ui-secondary-color);
+    color: var(--ui-primary-color);
 }
