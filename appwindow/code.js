@@ -84,5 +84,5 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 });
 
 document.querySelector("#filemanagerbutton").addEventListener("click", function() {
-    shell.showItemInFolder(projectdirectory + "/" + document.querySelector("#fileselect").value);
+    shell.openPath(projectdirectory);
 });
