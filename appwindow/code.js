@@ -1,6 +1,6 @@
-const { remote, app, shell } = require("electron");
+const { remote, app } = require("electron");
 const fs = require("fs");
-const { dialog } = remote;
+const { dialog, shell } = remote;
 
 var projectdirectory = "";
 
@@ -81,4 +81,8 @@ document.querySelector("#texteditor").addEventListener("keydown", function(e) {
 
 document.querySelector("#menubutton").addEventListener("click", function() {
     document.querySelector("#landingscreen").style.display = "";
+});
+
+document.querySelector("#filemanagerbutton").addEventListener("click", function() {
+    shell.showItemInFolder(projectdirectory + "/" + document.querySelector("#fileselect").value);
 });
