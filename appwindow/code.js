@@ -8,5 +8,6 @@ document.querySelector("#projectselect").addEventListener("click", function() {
     });
     if (dir) {
         projectdirectory = dir;
+        document.querySelector("#landingscreen").style.display = "none";
     }
 });
