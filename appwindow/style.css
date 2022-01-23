@@ -36,6 +36,22 @@ body {
     left: 0;
 }
 
+#topmenu {
+    width: 100vw;
+    height: 30px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+}
+
+#menubutton {
+    background-color: var(--ui-secondary-color);
+    color: var(--ui-primary-color);
+}
+
 .sectiontable {
     width: 100%;
     height: 100%;
@@ -44,13 +60,13 @@ body {
 
 #leftsection {
     width: 50vw;
-    height: 100vh;
+    height: calc(100vh - 30px);
     box-sizing: border-box;
     padding: 10px;
     position: absolute;
     z-index: 1;
     left: 0;
-    top: 0;
+    bottom: 0;
 }
 
 #texteditor {
@@ -67,13 +83,13 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 #rightsection {
     width: 50vw;
-    height: 100vh;
+    height: calc(100vh - 30px);
     box-sizing: border-box;
     padding: 10px;
     position: absolute;
     z-index: 1;
     left: 50vw;
-    top: 0;
+    bottom: 0;
 }
 
 #pagepreview {

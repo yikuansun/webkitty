@@ -78,3 +78,7 @@ document.querySelector("#texteditor").addEventListener("keydown", function(e) {
         saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
     }
 });
+
+document.querySelector("#menubutton").addEventListener("click", function() {
+    document.querySelector("#landingscreen").style.display = "";
+});
