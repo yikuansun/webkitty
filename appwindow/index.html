@@ -10,22 +10,41 @@
         </div>
         <div id="topmenu"></div>
         <div id="leftsection">
-            <select id="fileselect"></select>
-            <br />
-            <textarea id="texteditor"></textarea>
-        </div>
-        <div id="rightsection">
-            <table id="browsertopbar">
-                <tr>
-                    <td style="white-space: nowrap; width: 1px;">
-                        <button id="reloadbutton">Reload</button>
-                    </td>
+            <table class="sectiontable">
+                <tr style="height: 1px;">
                     <td>
-                        <input type="text" id="addressbar" />
+                        <select id="fileselect"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea id="texteditor"></textarea>
                     </td>
                 </tr>
             </table>
-            <webview id="pagepreview"></webview>
+        </div>
+        <div id="rightsection">
+            <table class="sectiontable">
+                <tr height="1px">
+                    <td>
+                        <table id="browsertopbar">
+                            <tr>
+                                <td style="white-space: nowrap; width: 1px;">
+                                    <button id="reloadbutton">Reload</button>
+                                </td>
+                                <td>
+                                    <input type="text" id="addressbar" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <webview id="pagepreview"></webview>
+                    </td>
+                </tr>
+            </table>
         </div>
         <script src="code.js"></script>
     </body>

@@ -16,6 +16,12 @@ body {
     left: 0;
 }
 
+.sectiontable {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
 #leftsection {
     width: 50vw;
     height: 100vh;
@@ -29,7 +35,7 @@ body {
 
 #texteditor {
     width: 100%;
-    height: 90%;
+    height: 100%;
     resize: none;
 }
 
@@ -46,7 +52,7 @@ body {
 
 #pagepreview {
     width: 100%;
-    height: calc(100% - 100px);
+    height: 100%;
 }
 
 #browsertopbar {
