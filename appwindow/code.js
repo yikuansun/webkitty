@@ -34,3 +34,7 @@ document.querySelector("#addressbar").addEventListener("change", function() {
 document.querySelector("#reloadbutton").addEventListener("click", function() {
     document.querySelector("#pagepreview").src = document.querySelector("#addressbar").value;
 });
+
+document.querySelector("#devtoolsbutton").addEventListener("click", function() {
+    document.querySelector("#pagepreview").openDevTools();
+});
