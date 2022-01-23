@@ -99,6 +99,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 #reloadbutton, #savebutton, #devtoolsbutton {
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
+    user-select: none;
 }
 
 #fileselect {
