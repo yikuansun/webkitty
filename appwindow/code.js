@@ -79,6 +79,19 @@ document.querySelector("#texteditor").addEventListener("keydown", function(e) {
     }
 });
 
+document.querySelector("#texteditor").addEventListener("keydown", function(e) {
+    var indentLength = 4;
+    if (e.key == "Tab") {
+        e.preventDefault();
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        this.value = this.value.substring(0, start) + " ".repeat(indentLength) + this.value.substring(end);
+
+        this.selectionStart = this.selectionEnd = start + indentLength;
+    }
+});
+
 document.querySelector("#menubutton").addEventListener("click", function() {
     document.querySelector("#landingscreen").style.display = "";
 });
