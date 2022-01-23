@@ -38,6 +38,10 @@ function setProject(dir) {
     document.querySelector("#addressbar").value = "file://" + dir + "/index.html";
 }
 
+function saveTextFile(filepath, filecontents) {
+    fs.writeFileSync(filepath, filecontents);
+}
+
 document.querySelector("#projectselect").addEventListener("click", function() {
     var dir = dialog.showOpenDialogSync({
         properties: ["openDirectory"]
@@ -63,4 +67,14 @@ document.querySelector("#devtoolsbutton").addEventListener("click", function() {
 
 document.querySelector("#fileselect").addEventListener("change", function() {
     openFileInTextEditor(projectdirectory, this.value);
+});
+
+document.querySelector("#savebutton").addEventListener("click", function() {
+    saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, document.querySelector("#texteditor").value);
+});
+
+document.querySelector("#texteditor").addEventListener("keydown", function(e) {
+    if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
+        saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
+    }
 });
