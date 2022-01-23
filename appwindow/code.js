@@ -10,7 +10,7 @@ function openFileInTextEditor(dir, rel_path) {
 }
 
 function setProject(dir) {
-    var recursion = function(directory, optgroup) {
+    var recursion = function(directory, optgroup, basedir) {
         var dircontents = fs.readdirSync(directory);
         for (var file of dircontents) {
             if (fs.lstatSync(directory + "/" + file).isDirectory()) {
@@ -18,18 +18,18 @@ function setProject(dir) {
                     var newOptGroup = document.createElement("optgroup");
                     newOptGroup.setAttribute("label", file);
                     optgroup.appendChild(newOptGroup);
-                    recursion(directory + "/" + file, newOptGroup);
+                    recursion(directory + "/" + file, newOptGroup, basedir);
                 }
             }
             else {
                 var option = document.createElement("option");
-                option.innerText = file;
+                option.innerText = (directory + "/" + file).split(basedir + "/")[1];
                 optgroup.appendChild(option);
             }
         }
     };
 
-    recursion(dir, document.querySelector("#fileselect"));
+    recursion(dir, document.querySelector("#fileselect"), dir);
 
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
