@@ -112,7 +112,7 @@ input:focus, textarea:focus, select:focus, button:focus {
     color: var(--ui-primary-color);
 }
 
-#reloadbutton, #savebutton, #devtoolsbutton, #filemanagerbutton {
+#reloadbutton, #savebutton, #devtoolsbutton, #filemanagerbutton, #openexternalbutton {
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
     user-select: none;

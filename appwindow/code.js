@@ -86,3 +86,7 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 document.querySelector("#filemanagerbutton").addEventListener("click", function() {
     shell.openPath(projectdirectory);
 });
+
+document.querySelector("#openexternalbutton").addEventListener("click", function() {
+    shell.openExternal(document.querySelector("#addressbar").value);
+});
