@@ -15,7 +15,16 @@
             <textarea id="texteditor"></textarea>
         </div>
         <div id="rightsection">
-            <input type="text" id="addressbar" />
+            <table id="browsertopbar">
+                <tr>
+                    <td style="white-space: nowrap; width: 1px;">
+                        <button id="reloadbutton">Reload</button>
+                    </td>
+                    <td>
+                        <input type="text" id="addressbar" />
+                    </td>
+                </tr>
+            </table>
             <webview id="pagepreview"></webview>
         </div>
         <script src="code.js"></script>

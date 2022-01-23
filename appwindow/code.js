@@ -30,3 +30,7 @@ document.querySelector("#projectselect").addEventListener("click", function() {
 document.querySelector("#addressbar").addEventListener("change", function() {
     document.querySelector("#pagepreview").src = this.value;
 });
+
+document.querySelector("#reloadbutton").addEventListener("click", function() {
+    document.querySelector("#pagepreview").reload();
+});

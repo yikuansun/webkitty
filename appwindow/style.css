@@ -49,6 +49,11 @@ body {
     height: calc(100% - 100px);
 }
 
+#browsertopbar {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 #addressbar {
     width: 100%;
     box-sizing: border-box;
