@@ -48,3 +48,8 @@ body {
     width: 100%;
     height: calc(100% - 100px);
 }
+
+#addressbar {
+    width: 100%;
+    box-sizing: border-box;
+}
