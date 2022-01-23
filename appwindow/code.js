@@ -32,5 +32,5 @@ document.querySelector("#addressbar").addEventListener("change", function() {
 });
 
 document.querySelector("#reloadbutton").addEventListener("click", function() {
-    document.querySelector("#pagepreview").reload();
+    document.querySelector("#pagepreview").src = document.querySelector("#addressbar").value;
 });
