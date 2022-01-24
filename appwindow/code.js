@@ -137,7 +137,8 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
         primarycolor: "#f5f5f5",
         secondarycolor: "#161616",
-        backgroundcolor: "#222222"
+        backgroundcolor: "#222222",
+        layout: "left-right"
     }));
 }
 function readSettings() {
@@ -145,6 +146,22 @@ function readSettings() {
     document.documentElement.style.setProperty("--background-color", userSettings.backgroundcolor);
     document.documentElement.style.setProperty("--ui-primary-color", userSettings.primarycolor);
     document.documentElement.style.setProperty("--ui-secondary-color", userSettings.secondarycolor);
+    if (userSettings.layout == "top-bottom") {
+        document.querySelector("#leftsection").style.width = "100vw";
+        document.querySelector("#rightsection").style.width = "100vw";
+        document.querySelector("#leftsection").style.height = "calc(50vh - 15px)";
+        document.querySelector("#rightsection").style.height = "calc(50vh - 15px)";
+        document.querySelector("#rightsection").style.left = "0";
+        document.querySelector("#leftsection").style.bottom = "calc(50vh - 15px)";
+    }
+    else {
+        document.querySelector("#leftsection").style.width = "";
+        document.querySelector("#rightsection").style.width = "";
+        document.querySelector("#leftsection").style.height = "";
+        document.querySelector("#rightsection").style.height = "";
+        document.querySelector("#rightsection").style.left = "";
+        document.querySelector("#leftsection").style.bottom = "";
+    }
 }
 readSettings();
 ipcMain.on("updateappsettings", function(data) {
