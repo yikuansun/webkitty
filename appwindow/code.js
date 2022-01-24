@@ -1,6 +1,6 @@
 const { remote, app } = require("electron");
 const fs = require("fs");
-const { dialog, shell } = remote;
+const { dialog, shell, BrowserWindow } = remote;
 
 var projectdirectory = "";
 
@@ -53,6 +53,21 @@ document.querySelector("#projectselect").addEventListener("click", function() {
     }
 });
 
+document.querySelector("#settingsbutton").addEventListener("click", function() {
+    var settingsWin = new BrowserWindow({
+        height: 500,
+        width: 400,
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            contextIsolation: false
+        }
+    });
+
+    settingsWin.setMenuBarVisibility(false);
+    settingsWin.loadFile(__dirname + "/settings/index.html");
+});
+
 document.querySelector("#addressbar").addEventListener("change", function() {
     document.querySelector("#pagepreview").src = this.value;
 });
@@ -103,3 +118,16 @@ document.querySelector("#filemanagerbutton").addEventListener("click", function(
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
     shell.openExternal(document.querySelector("#addressbar").value);
 });
+
+var userDataPath = (app || remote.app).getPath("userData");
+if (!fs.existsSync(userDataPath + "/settings.json")) {
+    fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
+        primarycolor: "#f5f5f5",
+        secondarycolor: "#161616",
+        backgroundcolor: "#222222"
+    }));
+}
+var userSettings = JSON.parse(fs.readFileSync(userDataPath + "/settings.json"));
+document.documentElement.style.setProperty("--background-color", userSettings.backgroundcolor);
+document.documentElement.style.setProperty("--ui-primary-color", userSettings.primarycolor);
+document.documentElement.style.setProperty("--ui-secondary-color", userSettings.secondarycolor);
