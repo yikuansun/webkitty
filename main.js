@@ -9,7 +9,8 @@ function createWindow() {
             nodeIntegration: true,
             enableRemoteModule: true,
             contextIsolation: false,
-            webviewTag: true
+            webviewTag: true,
+            devTools: false
         }
     });
 
