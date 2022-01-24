@@ -66,6 +66,10 @@ document.querySelector("#projectselect").addEventListener("click", function() {
     });
     if (dir[0]) {
         projectdirectory = dir[0];
+        if (!fs.readdirSync(dir[0]).includes("index.html")) {
+            alert("no index.html found in the selected project");
+            return;
+        }
         setProject(projectdirectory);
         document.querySelector("#landingscreen").style.display = "none";
     }
