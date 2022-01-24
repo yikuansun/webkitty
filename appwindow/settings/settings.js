@@ -18,6 +18,8 @@ function save_options() {
 
     ipcRenderer.send("updateappsettings");
 
+    window.close();
+
     return false;
 }
 
