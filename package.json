@@ -1,19 +1,27 @@
 {
   "name": "webkitty",
   "productName": "WebKitty",
+  "description": "Native web development IDE",
+  "version": "1.0.0",
+  "author": {
+    "name": "Yikuan Sun",
+    "url": "https://yikuansun.github.io"
+  },
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build-linux": "electron-packager . --icon icons/linux.png --platform linux",
-    "build-darwin": "electron-packager . --icon icons/darwin.icns --platform darwin",
-    "build-win32": "electron-packager . --icon icons/win32.ico --platform win32"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "devDependencies": {
     "electron": "^11.1.1",
-    "electron-packager": "^15.2.0"
+    "electron-builder": "^22.14.5"
   },
   "dependencies": {
     "adm-zip": "^0.5.5",
     "custom-electron-titlebar": "^3.2.7"
+  },
+  "build": {
+    "appId": "com.example.app"
   }
 }
