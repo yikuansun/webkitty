@@ -1,6 +1,6 @@
 const { remote, app } = require("electron");
 const fs = require("fs");
-const { dialog, shell, BrowserWindow } = remote;
+const { dialog, shell, BrowserWindow, ipcMain } = remote;
 
 var projectdirectory = "";
 
@@ -127,7 +127,13 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         backgroundcolor: "#222222"
     }));
 }
-var userSettings = JSON.parse(fs.readFileSync(userDataPath + "/settings.json"));
-document.documentElement.style.setProperty("--background-color", userSettings.backgroundcolor);
-document.documentElement.style.setProperty("--ui-primary-color", userSettings.primarycolor);
-document.documentElement.style.setProperty("--ui-secondary-color", userSettings.secondarycolor);
+function readSettings() {
+    var userSettings = JSON.parse(fs.readFileSync(userDataPath + "/settings.json"));
+    document.documentElement.style.setProperty("--background-color", userSettings.backgroundcolor);
+    document.documentElement.style.setProperty("--ui-primary-color", userSettings.primarycolor);
+    document.documentElement.style.setProperty("--ui-secondary-color", userSettings.secondarycolor);
+}
+readSettings();
+ipcMain.on("updateappsettings", function(data) {
+    readSettings();
+});
