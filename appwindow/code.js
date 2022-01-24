@@ -172,7 +172,7 @@ document.querySelector("#openexternalbutton").addEventListener("click", function
 });
 
 document.querySelector("#publishbutton").addEventListener("click", function() {
-    shell.openExternal("https://app.netlify.com/")
+    shell.openExternal("https://pages.github.com/")
 });
 
 var userDataPath = (app || remote.app).getPath("userData");
