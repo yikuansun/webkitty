@@ -175,6 +175,10 @@ document.querySelector("#publishbutton").addEventListener("click", function() {
     shell.openExternal("https://pages.github.com/")
 });
 
+document.querySelector("#htmlbuilderlink").addEventListener("click", function() {
+    shell.openExternal("https://github.com/yikuansun/html-builder");
+});
+
 var userDataPath = (app || remote.app).getPath("userData");
 if (!fs.existsSync(userDataPath + "/settings.json")) {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
