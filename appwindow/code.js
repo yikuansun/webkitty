@@ -43,6 +43,19 @@ function saveTextFile(filepath, filecontents) {
     fs.writeFileSync(filepath, filecontents);
 }
 
+document.querySelector("#newprojectbutton").addEventListener("click", function() {
+    var dir = dialog.showSaveDialogSync({
+        title: "New Project"
+    });
+    if (dir) {
+        fs.mkdirSync(dir);
+        fs.writeFileSync(dir + "/index.html", "<h1>Hello World!</h1>");
+        projectdirectory = dir;
+        setProject(projectdirectory);
+        document.querySelector("#landingscreen").style.display = "none";
+    }
+});
+
 document.querySelector("#projectselect").addEventListener("click", function() {
     var dir = dialog.showOpenDialogSync({
         properties: ["openDirectory"]
