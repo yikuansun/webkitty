@@ -10,7 +10,8 @@ A lightweight native HTML IDE for web developers of any level.
 ## Features
 
 - Customizable theme
-- Integrated previews
+- Integrated preview
+- Simulation of different hosts and browsers
 - Fast file navigation
 - Cross platform
 
