@@ -45,7 +45,7 @@ function saveTextFile(filepath, filecontents) {
 
 document.querySelector("#newprojectbutton").addEventListener("click", function() {
     var dir = dialog.showSaveDialogSync({
-        title: "New Project"
+        title: "Make a New Project"
     });
     if (dir) {
         fs.mkdirSync(dir);
@@ -58,6 +58,7 @@ document.querySelector("#newprojectbutton").addEventListener("click", function()
 
 document.querySelector("#projectselect").addEventListener("click", function() {
     var dir = dialog.showOpenDialogSync({
+        title: "Open Project Folder",
         properties: ["openDirectory"]
     });
     if (dir[0]) {
