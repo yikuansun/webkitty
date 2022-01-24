@@ -93,11 +93,13 @@ document.querySelector("#fileselect").addEventListener("mousedown", function() {
 
 document.querySelector("#savebutton").addEventListener("click", function() {
     saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, document.querySelector("#texteditor").value);
+    document.querySelector("#savebutton").style.fontWeight = "";
 });
 
 document.querySelector("#texteditor").addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
         saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
+        document.querySelector("#savebutton").style.fontWeight = "";
     }
 });
 
@@ -112,6 +114,10 @@ document.querySelector("#texteditor").addEventListener("keydown", function(e) {
 
         this.selectionStart = this.selectionEnd = start + indentLength;
     }
+});
+
+document.querySelector("#texteditor").addEventListener("input", function() {
+    document.querySelector("#savebutton").style.fontWeight = "bold";
 });
 
 document.querySelector("#menubutton").addEventListener("click", function() {
