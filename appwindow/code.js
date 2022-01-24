@@ -1,6 +1,7 @@
 const { remote, app } = require("electron");
 const fs = require("fs");
 const { dialog, shell, BrowserWindow, ipcMain } = remote;
+const marked = require("marked");
 
 var projectdirectory = "";
 
@@ -88,6 +89,21 @@ document.querySelector("#settingsbutton").addEventListener("click", function() {
 
     settingsWin.setMenuBarVisibility(false);
     settingsWin.loadFile(__dirname + "/settings/index.html");
+});
+
+document.querySelector("#aboutbutton").addEventListener("click", function() {
+    var readmehtml = marked.parse(fs.readFileSync(__dirname.replace("appwindow", "README.md"), "utf-8"));
+    var blob = new Blob([readmehtml], { type: "text/html" });
+    var readmeurl = URL.createObjectURL(blob);
+    
+    var aboutScreen = new BrowserWindow({
+        height: 500,
+        width: 400,
+        resizable: false
+    });
+
+    aboutScreen.setMenuBarVisibility(false);
+    aboutScreen.loadURL(readmeurl);
 });
 
 document.querySelector("#addressbar").addEventListener("change", function() {
