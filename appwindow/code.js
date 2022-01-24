@@ -92,18 +92,7 @@ document.querySelector("#settingsbutton").addEventListener("click", function() {
 });
 
 document.querySelector("#aboutbutton").addEventListener("click", function() {
-    var readmehtml = marked.parse(fs.readFileSync(__dirname.replace("appwindow", "README.md"), "utf-8"));
-    var blob = new Blob([readmehtml], { type: "text/html" });
-    var readmeurl = URL.createObjectURL(blob);
-    
-    var aboutScreen = new BrowserWindow({
-        height: 500,
-        width: 400,
-        resizable: false
-    });
-
-    aboutScreen.setMenuBarVisibility(false);
-    aboutScreen.loadURL(readmeurl);
+    shell.openExternal("https://github.com/yikuansun/webkitty");
 });
 
 document.querySelector("#addressbar").addEventListener("change", function() {
