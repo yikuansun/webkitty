@@ -22,6 +22,9 @@
     "custom-electron-titlebar": "^3.2.7"
   },
   "build": {
-    "appId": "com.example.app"
+    "appId": "com.example.app",
+    "directories": {
+      "buildResources": "resources"
+    }
   }
 }
