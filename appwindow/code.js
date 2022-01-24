@@ -183,7 +183,9 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         backgroundcolor: "#222222",
         layout: "left-right",
         codefontsize: 12,
-        autosave: true
+        autosave: true,
+        httpreferrer:  "",
+        useragent: "",
     }));
 }
 function readSettings() {
@@ -209,6 +211,12 @@ function readSettings() {
     }
     document.querySelector("#texteditor").style.fontSize = `${userSettings.codefontsize}px`;
     autosave = userSettings.autosave;
+    if (userSettings.httpreferrer) document.querySelector("#pagepreview").setAttribute("httpreferrer", userSettings.httpreferrer);
+    else document.querySelector("#pagepreview").removeAttribute("httpreferrer");
+    if (document.querySelector("#pagepreview").hasAttribute("#useragent")) {
+        document.querySelector("#pagepreview").setUserAgent(userSettings.useragent);
+    }
+    else document.querySelector("#pagepreview").setAttribute("useragent", userSettings.useragent);
 }
 readSettings();
 ipcMain.on("updateappsettings", function(data) {
