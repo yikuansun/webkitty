@@ -10,7 +10,7 @@ function createWindow() {
             enableRemoteModule: true,
             contextIsolation: false,
             webviewTag: true,
-            //devTools: false
+            devTools: false
         }
     });
 
