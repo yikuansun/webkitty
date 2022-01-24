@@ -49,7 +49,9 @@ document.querySelector("#newprojectbutton").addEventListener("click", function()
     });
     if (dir) {
         fs.mkdirSync(dir);
-        fs.writeFileSync(dir + "/index.html", "<h1>Hello World!</h1>");
+        fs.writeFileSync(dir + "/index.html", fs.readFileSync(__dirname + "/defaultindexhtml.txt"));
+        fs.writeFileSync(dir + "/code.js", "");
+        fs.writeFileSync(dir + "/style.css", "");
         projectdirectory = dir;
         setProject(projectdirectory);
         document.querySelector("#landingscreen").style.display = "none";
