@@ -45,7 +45,8 @@ function saveTextFile(filepath, filecontents) {
 
 document.querySelector("#newprojectbutton").addEventListener("click", function() {
     var dir = dialog.showSaveDialogSync({
-        title: "Make a New Project"
+        title: "Make a New Project",
+        defaultPath: (app || remote.app).getPath("documents") + "/New Project"
     });
     if (dir) {
         fs.mkdirSync(dir);
