@@ -141,7 +141,7 @@ document.querySelector("#texteditor").addEventListener("input", function() {
     document.querySelector("#savebutton").style.fontWeight = "bold";
 });
 
-var autosave = true; // maybe change later to use userSettings
+var autosave = true;
 document.querySelector("#texteditor").addEventListener("change", function() {
     if (autosave) {
         saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
