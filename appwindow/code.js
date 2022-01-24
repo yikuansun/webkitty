@@ -138,7 +138,8 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         primarycolor: "#f5f5f5",
         secondarycolor: "#161616",
         backgroundcolor: "#222222",
-        layout: "left-right"
+        layout: "left-right",
+        codefontsize: 12
     }));
 }
 function readSettings() {
@@ -162,6 +163,7 @@ function readSettings() {
         document.querySelector("#rightsection").style.left = "";
         document.querySelector("#leftsection").style.bottom = "";
     }
+    document.querySelector("#texteditor").style.fontSize = `${userSettings.codefontsize}px`;
 }
 readSettings();
 ipcMain.on("updateappsettings", function(data) {
