@@ -166,6 +166,10 @@ document.querySelector("#openexternalbutton").addEventListener("click", function
     shell.openExternal(document.querySelector("#addressbar").value);
 });
 
+document.querySelector("#publishbutton").addEventListener("click", function() {
+    shell.openExternal("https://app.netlify.com/")
+});
+
 var userDataPath = (app || remote.app).getPath("userData");
 if (!fs.existsSync(userDataPath + "/settings.json")) {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({

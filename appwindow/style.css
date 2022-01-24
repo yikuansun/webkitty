@@ -64,7 +64,7 @@ body {
     user-select: none;
 }
 
-#menubutton {
+#menubutton, #publishbutton {
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
     font-family: var(--ui-font);
