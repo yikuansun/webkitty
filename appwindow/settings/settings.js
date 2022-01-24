@@ -8,6 +8,7 @@ document.getElementById("secondarycolorpicker").value = currentSettings.secondar
 document.getElementById("backgroundcolorpicker").value = currentSettings.backgroundcolor;
 document.getElementById("layoutpicker").value = currentSettings.layout;
 document.getElementById("codefontsize").value = currentSettings.codefontsize;
+document.getElementById("autosave").checked = currentSettings.autosave;
 
 function save_options() {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
@@ -15,7 +16,8 @@ function save_options() {
         primarycolor: document.getElementById("primarycolorpicker").value,
         secondarycolor: document.getElementById("secondarycolorpicker").value,
         backgroundcolor: document.getElementById("backgroundcolorpicker").value,
-        codefontsize: parseInt(document.getElementById("codefontsize").value)
+        codefontsize: parseInt(document.getElementById("codefontsize").value),
+        autosave: document.getElementById("autosave").checked
     }));
 
     ipcRenderer.send("updateappsettings");

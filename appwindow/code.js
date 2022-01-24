@@ -141,6 +141,14 @@ document.querySelector("#texteditor").addEventListener("input", function() {
     document.querySelector("#savebutton").style.fontWeight = "bold";
 });
 
+var autosave = true; // maybe change later to use userSettings
+document.querySelector("#texteditor").addEventListener("change", function() {
+    if (autosave) {
+        saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
+        document.querySelector("#savebutton").style.fontWeight = "";
+    }
+});
+
 document.querySelector("#menubutton").addEventListener("click", function() {
     document.querySelector("#landingscreen").style.display = "";
 });
@@ -160,7 +168,8 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         secondarycolor: "#161616",
         backgroundcolor: "#222222",
         layout: "left-right",
-        codefontsize: 12
+        codefontsize: 12,
+        autosave: true
     }));
 }
 function readSettings() {
@@ -185,6 +194,7 @@ function readSettings() {
         document.querySelector("#leftsection").style.bottom = "";
     }
     document.querySelector("#texteditor").style.fontSize = `${userSettings.codefontsize}px`;
+    autosave = userSettings.autosave;
 }
 readSettings();
 ipcMain.on("updateappsettings", function(data) {
