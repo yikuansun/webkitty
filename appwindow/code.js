@@ -9,27 +9,28 @@ function openFileInTextEditor(dir, rel_path) {
     textarea.value = fs.readFileSync(dir + "/" + rel_path);
 }
 
-function setProject(dir) {
-    var recursion = function(directory, optgroup, basedir) {
-        var dircontents = fs.readdirSync(directory);
-        for (var file of dircontents) {
-            if (fs.lstatSync(directory + "/" + file).isDirectory()) {
-                if (file != ".git") {
-                    var newOptGroup = document.createElement("optgroup");
-                    newOptGroup.setAttribute("label", file);
-                    optgroup.appendChild(newOptGroup);
-                    recursion(directory + "/" + file, newOptGroup, basedir);
-                }
-            }
-            else {
-                var option = document.createElement("option");
-                option.innerText = (directory + "/" + file).split(basedir + "/")[1];
-                optgroup.appendChild(option);
+function buildFileSelector(directory, optgroup, basedir) {
+    var dircontents = fs.readdirSync(directory);
+    optgroup.innerHTML = "";
+    for (var file of dircontents) {
+        if (fs.lstatSync(directory + "/" + file).isDirectory()) {
+            if (file != ".git") {
+                var newOptGroup = document.createElement("optgroup");
+                newOptGroup.setAttribute("label", file);
+                optgroup.appendChild(newOptGroup);
+                buildFileSelector(directory + "/" + file, newOptGroup, basedir);
             }
         }
-    };
+        else {
+            var option = document.createElement("option");
+            option.innerText = (directory + "/" + file).split(basedir + "/")[1];
+            optgroup.appendChild(option);
+        }
+    }
+};
 
-    recursion(dir, document.querySelector("#fileselect"), dir);
+function setProject(dir) {
+    buildFileSelector(dir, document.querySelector("#fileselect"), dir);
 
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
@@ -82,6 +83,12 @@ document.querySelector("#devtoolsbutton").addEventListener("click", function() {
 
 document.querySelector("#fileselect").addEventListener("change", function() {
     openFileInTextEditor(projectdirectory, this.value);
+});
+
+document.querySelector("#fileselect").addEventListener("mousedown", function() {
+    var selectedFile = this.value;
+    buildFileSelector(projectdirectory, document.querySelector("#fileselect"), projectdirectory);
+    document.querySelector("#fileselect").value = selectedFile;
 });
 
 document.querySelector("#savebutton").addEventListener("click", function() {
