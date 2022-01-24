@@ -97,6 +97,11 @@ document.querySelector("#devtoolsbutton").addEventListener("click", function() {
     document.querySelector("#pagepreview").openDevTools();
 });
 
+document.querySelector("#pagepreview").addEventListener("new-window", function(e) {
+    shell.openExternal(e.url);
+    //window.open(e.url);
+});
+
 document.querySelector("#fileselect").addEventListener("change", function() {
     openFileInTextEditor(projectdirectory, this.value);
 });
