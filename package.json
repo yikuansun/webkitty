@@ -20,7 +20,8 @@
   "dependencies": {
     "adm-zip": "^0.5.5",
     "custom-electron-titlebar": "^3.2.7",
-    "marked": "^4.0.10"
+    "marked": "^4.0.10",
+    "monaco-editor": "^0.31.1"
   },
   "build": {
     "appId": "com.example.app",
