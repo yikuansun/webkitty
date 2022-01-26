@@ -1,7 +1,6 @@
 const { remote, app } = require("electron");
 const fs = require("fs");
 const { dialog, shell, BrowserWindow, ipcMain } = remote;
-const marked = require("marked");
 
 var projectdirectory = "";
 
