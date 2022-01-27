@@ -15,12 +15,10 @@ function buildFileSelector(directory, optgroup, basedir) {
     for (var file of dircontents) {
         if (file == ".DS_Store" || file == ".git") continue;
         if (fs.lstatSync(directory + "/" + file).isDirectory()) {
-            if (file != ".git") {
-                var newOptGroup = document.createElement("optgroup");
-                newOptGroup.setAttribute("label", file);
-                optgroup.appendChild(newOptGroup);
-                buildFileSelector(directory + "/" + file, newOptGroup, basedir);
-            }
+            var newOptGroup = document.createElement("optgroup");
+            newOptGroup.setAttribute("label", file);
+            optgroup.appendChild(newOptGroup);
+            buildFileSelector(directory + "/" + file, newOptGroup, basedir);
         }
         else {
             var option = document.createElement("option");
