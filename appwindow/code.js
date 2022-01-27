@@ -13,6 +13,7 @@ function buildFileSelector(directory, optgroup, basedir) {
     var dircontents = fs.readdirSync(directory);
     optgroup.innerHTML = "";
     for (var file of dircontents) {
+        if (file == ".DS_Store" || file == ".git") continue;
         if (fs.lstatSync(directory + "/" + file).isDirectory()) {
             if (file != ".git") {
                 var newOptGroup = document.createElement("optgroup");
