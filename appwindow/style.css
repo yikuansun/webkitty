@@ -93,6 +93,7 @@ body {
     resize: none;
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
+    white-space: nowrap;
 }
 
 input:focus, textarea:focus, select:focus, button:focus {
