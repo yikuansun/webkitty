@@ -15,3 +15,8 @@ A lightweight native HTML IDE for web developers of any level.
 - Fast file navigation
 - Cross platform
 
+
+## Screenshots
+
+![App Screenshot](https://raw.githubusercontent.com/yikuansun/webkitty/master/screenshots/blog.PNG)
+
