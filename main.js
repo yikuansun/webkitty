@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+require("@electron/remote/main").initialize();
 
 function createWindow() {
 
@@ -10,12 +11,14 @@ function createWindow() {
             enableRemoteModule: true,
             contextIsolation: false,
             webviewTag: true,
-            devTools: false
+            //devTools: false
         }
     });
 
     mainWindow.setMenuBarVisibility(false);
     mainWindow.loadFile("appwindow/index.html");
+
+    require("@electron/remote/main").enable(mainWindow.webContents);
 
 }
 

@@ -1,6 +1,5 @@
-const { remote, app } = require("electron");
 const fs = require("fs");
-const { dialog, shell, BrowserWindow, ipcMain } = remote;
+const { dialog, shell, BrowserWindow, ipcMain, app } = require("@electron/remote");
 
 var projectdirectory = "";
 
@@ -45,7 +44,7 @@ function saveTextFile(filepath, filecontents) {
 document.querySelector("#newprojectbutton").addEventListener("click", function() {
     var dir = dialog.showSaveDialogSync({
         title: "Make a New Project",
-        defaultPath: (app || remote.app).getPath("documents") + "/New Project"
+        defaultPath: app.getPath("documents") + "/New Project"
     });
     if (dir) {
         fs.mkdirSync(dir);
@@ -177,7 +176,7 @@ document.querySelector("#htmlbuilderlink").addEventListener("click", function() 
     shell.openExternal("https://github.com/yikuansun/html-builder");
 });
 
-var userDataPath = (app || remote.app).getPath("userData");
+var userDataPath = app.getPath("userData");
 if (!fs.existsSync(userDataPath + "/settings.json")) {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
         primarycolor: "#f5f5f5",
