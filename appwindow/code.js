@@ -1,5 +1,6 @@
 const fs = require("fs");
-const { dialog, shell, BrowserWindow, ipcMain, app } = require("@electron/remote");
+const { dialog, shell, BrowserWindow, app } = require("@electron/remote");
+const { ipcRenderer } = require("electron");
 
 var projectdirectory = "";
 
@@ -74,18 +75,7 @@ document.querySelector("#projectselect").addEventListener("click", function() {
 });
 
 document.querySelector("#settingsbutton").addEventListener("click", function() {
-    var settingsWin = new BrowserWindow({
-        height: 500,
-        width: 400,
-        webPreferences: {
-            nodeIntegration: true,
-            enableRemoteModule: true,
-            contextIsolation: false
-        }
-    });
-
-    settingsWin.setMenuBarVisibility(false);
-    settingsWin.loadFile(__dirname + "/settings/index.html");
+    ipcRenderer.send("opensettingswin");
 });
 
 document.querySelector("#aboutbutton").addEventListener("click", function() {
@@ -220,6 +210,6 @@ function readSettings() {
     else document.querySelector("#pagepreview").setAttribute("useragent", userSettings.useragent);
 }
 readSettings();
-ipcMain.on("updateappsettings", function(data) {
+ipcRenderer.on("updateappsettings", function(data) {
     readSettings();
 });

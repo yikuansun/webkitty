@@ -1,6 +1,7 @@
 const fs = require('fs');
-const { app, ipcRenderer, remote } = require('electron');
-const userDataPath = (app || remote.app).getPath("userData");
+const { ipcRenderer } = require('electron');
+const { app } = require("@electron/remote");
+const userDataPath = app.getPath("userData");
 
 var currentSettings = JSON.parse(fs.readFileSync(userDataPath + "/settings.json", "utf-8"));
 document.getElementById("primarycolorpicker").value = currentSettings.primarycolor;
