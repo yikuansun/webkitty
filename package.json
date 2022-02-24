@@ -26,6 +26,24 @@
     "appId": "com.example.app",
     "directories": {
       "buildResources": "resources"
+    },
+    "dmg": {
+        "window": {
+            "width": 512,
+            "height": 320
+        },
+        "contents": [
+            {
+                "x": 160,
+                "y": 180
+            },
+            {
+                "x": 352,
+                "y": 180,
+                "type": "link",
+                "path": "/Applications"
+            }
+        ]
     }
   }
 }
