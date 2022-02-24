@@ -6,6 +6,7 @@ function createWindow() {
     var mainWindow = new BrowserWindow({
         width: 1200,
         height: 900,
+        backgroundColor: "#222222",
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true,
