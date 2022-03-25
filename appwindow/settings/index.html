@@ -2,8 +2,31 @@
 <html>
     <head>
         <title>Settings - WebKitty</title>
+        <style>
+            body {
+                background-color: #222222;
+                color: #f5f5f5;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+            input, select, button {
+                background-color: #161616;
+                outline: none!important;
+                color: #f5f5f5;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                accent-color: #f5f5f5;
+            }
+            hr {
+                background: grey;
+                border: 1px solid grey;
+                opacity: 0.1;
+            }
+            input[type=number] {
+                width: 50px;
+                text-align: center;
+            }
+        </style>
     </head>
-    <body style="margin: 0; width: 100vw; height: 100vh; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; user-select: none;">
+    <body style="margin: 0; width: 100vw; height: 100vh; user-select: none;">
         <table style="width: 100%; height: 100%"><tr><td>
             <center>
                 <form>
@@ -16,8 +39,8 @@
                     <br />Secondary Color: <input id="secondarycolorpicker" type="color" />
                     <br />Background Color: <input id="backgroundcolorpicker" type="color" />
                     <br /><br /><hr /><br /><b>Site Preview</b>
-                    <br />Referrer URL: <input id="httpreferrer" type="text" />
-                    <br />Custom User Agent: <input id="useragent" type="text" />
+                    <br />Referrer URL: <input id="httpreferrer" type="url" />
+                    <br />Custom User Agent: <input id="useragent" type="text" spellcheck="false" />
                     <br /><br /><hr /><br /><button>Save settings</button>
                 </form>
             </center>

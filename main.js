@@ -35,7 +35,7 @@ app.on("window-all-closed", function() { app.quit(); });
 
 ipcMain.on("opensettingswin", function(data) {
     var settingsWin = new BrowserWindow({
-        height: 500,
+        height: 555,
         width: 400,
         webPreferences: {
             nodeIntegration: true,
