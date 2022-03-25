@@ -1,49 +1,49 @@
 {
-  "name": "webkitty",
-  "productName": "WebKitty",
-  "description": "Native web development IDE",
-  "version": "1.2.0",
-  "author": {
-    "name": "Yikuan Sun",
-    "url": "https://yikuansun.github.io"
-  },
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
-  },
-  "devDependencies": {
-    "electron": "^17.1.0",
-    "electron-builder": "^22.14.5"
-  },
-  "dependencies": {
-    "@electron/remote": "^2.0.5",
-    "adm-zip": "^0.5.5",
-    "custom-electron-titlebar": "^3.2.7"
-  },
-  "build": {
-    "appId": "com.electron.webkitty",
-    "directories": {
-      "buildResources": "resources"
+    "name": "webkitty",
+    "productName": "WebKitty",
+    "description": "Native web development IDE",
+    "version": "1.2.0",
+    "author": {
+        "name": "Yikuan Sun",
+        "url": "https://yikuansun.github.io"
     },
-    "dmg": {
-        "window": {
-            "width": 512,
-            "height": 320
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "devDependencies": {
+        "electron": "^17.1.0",
+        "electron-builder": "^22.14.5"
+    },
+    "dependencies": {
+        "@electron/remote": "^2.0.5",
+        "adm-zip": "^0.5.5",
+        "custom-electron-titlebar": "^3.2.7"
+    },
+    "build": {
+        "appId": "com.electron.webkitty",
+        "directories": {
+            "buildResources": "resources"
         },
-        "contents": [
-            {
-                "x": 160,
-                "y": 180
+        "dmg": {
+            "window": {
+                "width": 512,
+                "height": 320
             },
-            {
-                "x": 352,
-                "y": 180,
-                "type": "link",
-                "path": "/Applications"
-            }
-        ]
+            "contents": [
+                {
+                    "x": 160,
+                    "y": 180
+                },
+                {
+                    "x": 352,
+                    "y": 180,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        }
     }
-  }
 }
