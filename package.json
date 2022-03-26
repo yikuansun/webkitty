@@ -19,8 +19,7 @@
     },
     "dependencies": {
         "@electron/remote": "^2.0.5",
-        "adm-zip": "^0.5.5",
-        "custom-electron-titlebar": "^3.2.7"
+        "adm-zip": "^0.5.5"
     },
     "build": {
         "appId": "com.electron.webkitty",
