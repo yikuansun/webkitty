@@ -15,57 +15,59 @@
             <br />
             <button id="aboutbutton">About WebKitty</button>
         </div>
-        <div id="topmenu">
-            <button id="menubutton">Menu</button>
-            <button id="publishbutton">Publish Your Site</button>
-            <button id="htmlbuilderlink">Make a Desktop App</button>
-        </div>
-        <div id="leftsection">
-            <table class="sectiontable">
-                <tr style="height: 1px;">
-                    <td>
-                        <select id="fileselect"></select>
-                        <button id="savebutton">Save</button>
-                        <button id="filemanagerbutton">Show in File Manager</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <textarea id="texteditor" spellcheck="false"></textarea>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="rightsection">
-            <table class="sectiontable">
-                <tr height="1px">
-                    <td>
-                        <table id="browsertopbar">
-                            <tr>
-                                <td style="white-space: nowrap; width: 1px;">
-                                    <button id="reloadbutton">&#8635;</button>
-                                </td>
+        <div class="main">
+            <div class="file-browser">
+                <select id="fileselect"></select>
+            </div>
+            <div class="project" id="first">
+                <div class="tabs"></div>
+                <div class="editor">
+                    <div id="leftsection">
+                        <table class="sectiontable">
+                            <tr style="height: 1px;">
                                 <td>
-                                    <input type="text" id="addressbar" />
+                                    <button id="filemanagerbutton">Show in File Manager</button>
+                                    <button id="devtoolsbutton">Open DevTools</button>
                                 </td>
-                                <td style="white-space: nowrap; width: 1px;">
-                                    <button id="openexternalbutton">&#x1F5D7;</button>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <textarea id="texteditor" spellcheck="false"></textarea>
                                 </td>
                             </tr>
                         </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <webview id="pagepreview" allowpopups></webview>
-                    </td>
-                </tr>
-                <tr style="height: 1px;">
-                    <td>
-                        <button id="devtoolsbutton">Open DevTools</button>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
+            <div id="separator"></div>
+            <div class="preview" id="second">
+                <div id="rightsection">
+                    <table class="sectiontable">
+                        <tr height="1px">
+                            <td>
+                                <table id="browsertopbar">
+                                    <tr>
+                                        <td style="white-space: nowrap; width: 1px;">
+                                            <button id="reloadbutton">&#8635;</button>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="addressbar" />
+                                        </td>
+                                        <td style="white-space: nowrap; width: 1px;">
+                                            <button id="openexternalbutton">&#x1F5D7;</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <webview id="pagepreview" allowpopups></webview>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <script src="code.js"></script>
     </body>

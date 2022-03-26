@@ -103,18 +103,69 @@ document.querySelector("#fileselect").addEventListener("mousedown", function() {
     buildFileSelector(projectdirectory, document.querySelector("#fileselect"), projectdirectory);
     document.querySelector("#fileselect").value = selectedFile;
 });
-
+/*
 document.querySelector("#savebutton").addEventListener("click", function() {
     saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, document.querySelector("#texteditor").value);
     document.querySelector("#savebutton").style.fontWeight = "";
 });
-
+*/
 document.querySelector("#texteditor").addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
         saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
         document.querySelector("#savebutton").style.fontWeight = "";
     }
 });
+
+
+// A function is used for dragging and moving
+function dragElement(element, direction)
+{
+    var   md; // remember mouse down info
+    const first  = document.getElementById("first");
+    const second = document.getElementById("second");
+
+    element.onmousedown = onMouseDown;
+
+    function onMouseDown(e)
+    {
+        document.getElementById("rightsection").classList.add("nopointer");
+        //console.log("mouse down: " + e.clientX);
+        md = {e,
+              offsetLeft:  element.offsetLeft,
+              offsetTop:   element.offsetTop,
+              firstWidth:  first.offsetWidth,
+              secondWidth: second.offsetWidth
+             };
+
+        document.onmousemove = onMouseMove;
+        document.onmouseup = () => {
+            //console.log("mouse up");
+            document.onmousemove = document.onmouseup = null;
+            document.getElementById("rightsection").classList.remove("nopointer");
+        }
+    }
+
+    function onMouseMove(e)
+    {
+        //console.log("mouse move: " + e.clientX);
+        var delta = {x: e.clientX - md.e.clientX,
+                     y: e.clientY - md.e.clientY};
+
+        if (direction === "H" ) // Horizontal
+        {
+            // Prevent negative-sized elements
+            delta.x = Math.min(Math.max(delta.x, -md.firstWidth),
+                       md.secondWidth);
+
+            element.style.left = md.offsetLeft + delta.x + "px";
+            first.style.width = (md.firstWidth + delta.x) + "px";
+            second.style.width = (md.secondWidth - delta.x) + "px";
+        }
+    }
+}
+
+
+dragElement( document.getElementById("separator"), "H" );
 
 document.querySelector("#texteditor").addEventListener("keydown", function(e) {
     var indentLength = 4;
@@ -128,11 +179,11 @@ document.querySelector("#texteditor").addEventListener("keydown", function(e) {
         this.selectionStart = this.selectionEnd = start + indentLength;
     }
 });
-
+/*
 document.querySelector("#texteditor").addEventListener("input", function() {
     document.querySelector("#savebutton").style.fontWeight = "bold";
 });
-
+*/
 var autosave = true;
 document.querySelector("#texteditor").addEventListener("change", function() {
     if (autosave) {
@@ -140,11 +191,11 @@ document.querySelector("#texteditor").addEventListener("change", function() {
         document.querySelector("#savebutton").style.fontWeight = "";
     }
 });
-
+/*
 document.querySelector("#menubutton").addEventListener("click", function() {
     document.querySelector("#landingscreen").style.display = "";
 });
-
+*/
 document.querySelector("#filemanagerbutton").addEventListener("click", function() {
     shell.openPath(projectdirectory);
 });
@@ -152,7 +203,7 @@ document.querySelector("#filemanagerbutton").addEventListener("click", function(
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
     shell.openExternal(document.querySelector("#addressbar").value);
 });
-
+/*
 document.querySelector("#publishbutton").addEventListener("click", function() {
     shell.openExternal("https://pages.github.com/")
 });
@@ -160,7 +211,7 @@ document.querySelector("#publishbutton").addEventListener("click", function() {
 document.querySelector("#htmlbuilderlink").addEventListener("click", function() {
     shell.openExternal("https://github.com/yikuansun/html-builder");
 });
-
+*/
 var userDataPath = app.getPath("userData");
 if (!fs.existsSync(userDataPath + "/settings.json")) {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
@@ -207,4 +258,15 @@ function readSettings() {
 readSettings();
 ipcRenderer.on("updateappsettings", function(data) {
     readSettings();
+});
+
+ipcRenderer.on("project:save", function() {
+    console.log("Sending savedata", {
+        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+        data: document.querySelector("#texteditor").value
+    })
+    ipcRenderer.send("project:save", {
+        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+        data: document.querySelector("#texteditor").value
+    });
 });
