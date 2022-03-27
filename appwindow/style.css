@@ -145,6 +145,7 @@ input:focus, textarea:focus, select:focus, button:focus {
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
     font-family: var(--ui-font);
+    border: 3px inset var(--ui-secondary-color);
 }
 
 #reloadbutton, #savebutton, #devtoolsbutton, #filemanagerbutton, #openexternalbutton {
