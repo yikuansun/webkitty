@@ -109,6 +109,7 @@ body {
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
     white-space: nowrap;
+    border-width: 0;
 }
 
 input:focus, textarea:focus, select:focus, button:focus {
