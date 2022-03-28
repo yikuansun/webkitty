@@ -20,6 +20,7 @@
     "dependencies": {
         "@electron/remote": "^2.0.5",
         "adm-zip": "^0.5.5",
+        "codemirror": "^5.65.2",
         "custom-electron-titlebar": "^3.2.7"
     },
     "build": {
