@@ -40,6 +40,10 @@ body {
     min-width: 10px;
 }
 
+.editor {
+    height: 100%;
+}
+
 #separator {
     cursor: col-resize;
     background-color: #aaa;
@@ -187,4 +191,14 @@ input:focus, textarea:focus, select:focus, button:focus {
     background-color: var(--ui-secondary-color);
     color: var(--ui-primary-color);
     font-family: var(--ui-font);
+}
+
+.cdm {
+    height: 100%;
+    width: 100%;
+}
+
+.cdm>.CodeMirror {
+    height: 100%;
+    width: 100%;
 }

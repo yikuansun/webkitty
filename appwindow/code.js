@@ -1,12 +1,32 @@
 const fs = require("fs");
+const path = require("path");
 const { dialog, shell, BrowserWindow, app } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
 
-var projectdirectory = "";
+let projectdirectory = "";
 
-function openFileInTextEditor(dir, rel_path) {
-    var textarea = document.querySelector("#texteditor");
-    textarea.value = fs.readFileSync(dir + "/" + rel_path);
+let currentTheme = "mbo";
+//GLOBAL EDITOR CONFIGURATION
+let options = {
+  lineNumbers: true,
+  theme: currentTheme,
+  lineWrapping: true,
+  autoCloseBrackets: true,
+  matchBrackets: true
+};
+
+let editor = CodeMirror(document.getElementById("cdm"), options);
+editor.setOption("mode", "htmlmixed");
+
+function openFileInTextEditor(dir, rel_path, callback = false) {
+    //let code = fs.readFileSync();
+
+    fs.readFile(path.join(dir, rel_path), 'utf8' , (err, data) => {
+      if (err) return console.error(err);
+
+      editor.setValue(data);
+      if (typeof callback == "function") callback();
+    });
 }
 
 function buildFileSelector(directory, optgroup, basedir) {
@@ -164,26 +184,8 @@ function dragElement(element, direction)
     }
 }
 
-
 dragElement( document.getElementById("separator"), "H" );
 
-document.querySelector("#texteditor").addEventListener("keydown", function(e) {
-    var indentLength = 4;
-    if (e.key == "Tab") {
-        e.preventDefault();
-        var start = this.selectionStart;
-        var end = this.selectionEnd;
-
-        this.value = this.value.substring(0, start) + " ".repeat(indentLength) + this.value.substring(end);
-
-        this.selectionStart = this.selectionEnd = start + indentLength;
-    }
-});
-/*
-document.querySelector("#texteditor").addEventListener("input", function() {
-    document.querySelector("#savebutton").style.fontWeight = "bold";
-});
-*/
 var autosave = true;
 document.querySelector("#texteditor").addEventListener("change", function() {
     if (autosave) {
@@ -263,10 +265,10 @@ ipcRenderer.on("updateappsettings", function(data) {
 ipcRenderer.on("project:save", function() {
     console.log("Sending savedata", {
         path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-        data: document.querySelector("#texteditor").value
+        data: editor.getValue()
     })
     ipcRenderer.send("project:save", {
         path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-        data: document.querySelector("#texteditor").value
+        data: editor.getValue()
     });
 });
