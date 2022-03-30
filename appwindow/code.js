@@ -10,7 +10,7 @@ let currentTheme = "mbo";
 let options = {
   lineNumbers: true,
   theme: currentTheme,
-  lineWrapping: true,
+  //lineWrapping: true,
   autoCloseBrackets: true,
   matchBrackets: true
 };
