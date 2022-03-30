@@ -187,11 +187,21 @@ function dragElement(element, direction)
 dragElement( document.getElementById("separator"), "H" );
 
 var autosave = true;
-document.querySelector("#texteditor").addEventListener("change", function() {
+/*document.querySelector("#texteditor").addEventListener("change", function() {
     if (autosave) {
         saveTextFile(projectdirectory + "/" + document.querySelector("#fileselect").value, this.value);
         document.querySelector("#savebutton").style.fontWeight = "";
     }
+});*/
+editor.on("change", function() {
+    console.log("Sending savedata", {
+        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+        data: editor.getValue()
+    })
+    ipcRenderer.send("project:save", {
+        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+        data: editor.getValue()
+    });
 });
 /*
 document.querySelector("#menubutton").addEventListener("click", function() {
