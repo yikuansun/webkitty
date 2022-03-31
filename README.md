@@ -4,7 +4,9 @@
 
 # WebKitty
 
-A lightweight native HTML IDE for web developers of any level.
+**Web Development shouldn't be hard.**
+
+That's why  I built WebKitty, an all-in one tool for editing, testing and debugging HTML projects.
 
 
 ## Features
