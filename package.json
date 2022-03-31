@@ -7,6 +7,9 @@
         "name": "Yikuan Sun",
         "url": "https://yikuansun.github.io"
     },
+    "contributors": [
+        "MySpaceEmoCat (https://github.com/MySpaceEmoCat)"
+    ],
     "main": "main.js",
     "scripts": {
         "start": "electron .",
