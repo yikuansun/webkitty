@@ -251,7 +251,7 @@ function readSettings() {
     document.documentElement.style.setProperty("--background-color", userSettings.backgroundcolor);
     document.documentElement.style.setProperty("--ui-primary-color", userSettings.primarycolor);
     document.documentElement.style.setProperty("--ui-secondary-color", userSettings.secondarycolor);
-    if (userSettings.layout == "top-bottom") {
+    /*if (userSettings.layout == "top-bottom") {
         document.querySelector("#leftsection").style.width = "100vw";
         document.querySelector("#rightsection").style.width = "100vw";
         document.querySelector("#leftsection").style.height = "calc(50vh - 15px)";
@@ -266,8 +266,8 @@ function readSettings() {
         document.querySelector("#rightsection").style.height = "";
         document.querySelector("#rightsection").style.left = "";
         document.querySelector("#leftsection").style.bottom = "";
-    }
-    document.querySelector("#texteditor").style.fontSize = `${userSettings.codefontsize}px`;
+    }*/
+    document.querySelector(".CodeMirror").style.fontSize = `${userSettings.codefontsize}px`;
     autosave = userSettings.autosave;
     if (userSettings.httpreferrer) document.querySelector("#pagepreview").setAttribute("httpreferrer", userSettings.httpreferrer);
     else document.querySelector("#pagepreview").removeAttribute("httpreferrer");
