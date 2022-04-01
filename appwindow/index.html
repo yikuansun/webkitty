@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>WebKitty</title>
-        <link rel="stylesheet" href="style.css" />
 
         <link rel="stylesheet" type="text/css" href="../node_modules/codemirror/lib/codemirror.css">
         <link rel="stylesheet" type="text/css" href="../node_modules/codemirror/theme/mbo.css">
+        
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <div id="landingscreen">
@@ -24,8 +25,7 @@
             <div class="project" id="first">
                 <div class="tabs"></div>
                 <div class="editor">
-                    <div class="cdm" id="cdm"></div>
-                    <div id="leftsection" style="display: none;">
+                    <div id="leftsection">
                         <table class="sectiontable">
                             <tr style="height: 1px;">
                                 <td>
@@ -36,9 +36,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea id="texteditor" spellcheck="false"></textarea>
+                                    <textarea id="texteditor" spellcheck="false" style="display: none;"></textarea>
+                                    <div id="cdm"></div>
                                 </td>
                             </tr>
+                            <tr><td>hi</td></tr>
                         </table>
                     </div>
                 </div>

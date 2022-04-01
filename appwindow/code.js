@@ -17,6 +17,7 @@ let options = {
 
 let editor = CodeMirror(document.getElementById("cdm"), options);
 editor.setOption("mode", "htmlmixed");
+editor.setSize("100%", "calc(100vh - 54px)"); // codemirror doesn't repect height of parent element.
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
