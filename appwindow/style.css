@@ -46,15 +46,17 @@ body {
 
 #separator {
     cursor: col-resize;
-    background-color: #aaa;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='black'/></svg>");
+    background-color: var(--ui-primary-color);
     background-repeat: no-repeat;
     background-position: center;
     width: 10px;
-    height: 100%;
+    height: 100vh;
+    border: 4px solid var(--background-color);
+    box-sizing: border-box;
+    opacity: 0.36;
 
     /* Prevent the browser's built-in drag from interfering */
-    -moz-user-select: none;
+    -moz-user-select: none; /*Literally Electron???*/
     -ms-user-select: none;
     user-select: none;
 }
