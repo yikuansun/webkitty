@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>WebKitty</title>
+
+        <link rel="stylesheet" type="text/css" href="../node_modules/codemirror/lib/codemirror.css">
+        <link rel="stylesheet" type="text/css" href="../node_modules/codemirror/theme/mbo.css">
+        
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
@@ -15,58 +19,76 @@
             <br />
             <button id="aboutbutton">About WebKitty</button>
         </div>
-        <div id="topmenu">
-            <button id="menubutton">Menu</button>
-            <button id="publishbutton">Publish Your Site</button>
-            <button id="htmlbuilderlink">Make a Desktop App</button>
-        </div>
-        <div id="leftsection">
-            <table class="sectiontable">
-                <tr style="height: 1px;">
-                    <td>
-                        <select id="fileselect"></select>
-                        <button id="savebutton">Save</button>
-                        <button id="filemanagerbutton">Show in File Manager</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <textarea id="texteditor" spellcheck="false"></textarea>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="rightsection">
-            <table class="sectiontable">
-                <tr height="1px">
-                    <td>
-                        <table id="browsertopbar">
-                            <tr>
-                                <td style="white-space: nowrap; width: 1px;">
-                                    <button id="reloadbutton">&#8635;</button>
-                                </td>
+        <div class="main">
+            <div class="file-browser">
+            </div>
+            <div class="project" id="first">
+                <div class="tabs"></div>
+                <div class="editor">
+                    <div id="leftsection">
+                        <table class="sectiontable">
+                            <tr style="height: 1px;">
                                 <td>
-                                    <input type="text" id="addressbar" />
-                                </td>
-                                <td style="white-space: nowrap; width: 1px;">
-                                    <button id="openexternalbutton">&#x1F5D7;</button>
+                                    <select id="fileselect"></select>
+                                    <button id="filemanagerbutton">Show in File Manager</button>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <textarea id="texteditor" spellcheck="false" style="display: none;"></textarea>
+                                    <div id="cdm"></div>
+                                </td>
+                            </tr>
+                            <tr><td>hi</td></tr>
                         </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <webview id="pagepreview" allowpopups></webview>
-                    </td>
-                </tr>
-                <tr style="height: 1px;">
-                    <td>
-                        <button id="devtoolsbutton">Open DevTools</button>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
+            <div id="separator"></div>
+            <div class="preview" id="second">
+                <div id="rightsection">
+                    <table class="sectiontable">
+                        <tr height="1px">
+                            <td>
+                                <table id="browsertopbar">
+                                    <tr>
+                                        <td style="white-space: nowrap; width: 1px;">
+                                            <button id="reloadbutton">&#8635;</button>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="addressbar" />
+                                        </td>
+                                        <td style="white-space: nowrap; width: 1px;">
+                                            <button id="openexternalbutton">&#x1F5D7;</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <webview id="pagepreview" allowpopups></webview>
+                            </td>
+                        </tr>
+                        <tr height="1px">
+                            <td style="text-align: center;">
+                                <button id="devtoolsbutton">Open DevTools</button>
+                                <button id="menubutton">Close project</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
+        <script src="../node_modules/codemirror/lib/codemirror.js"></script>
+        <script src="../node_modules/codemirror/mode/javascript/javascript.js"></script>
+        <script src="../node_modules/codemirror/mode/clike/clike.js"></script>
+        <script src="../node_modules/codemirror/mode/css/css.js"></script>
+        <script src="../node_modules/codemirror/mode/xml/xml.js"></script>
+        <script src="../node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+        <script src="../node_modules/codemirror/addon/edit/closebrackets.js"></script>
+        <script src="../node_modules/codemirror/addon/edit/matchbrackets.js"></script>
+
         <script src="code.js"></script>
     </body>
 </html>

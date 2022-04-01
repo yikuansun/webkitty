@@ -7,6 +7,9 @@
         "name": "Yikuan Sun",
         "url": "https://yikuansun.github.io"
     },
+    "contributors": [
+        "MySpaceEmoCat (https://github.com/MySpaceEmoCat)"
+    ],
     "main": "main.js",
     "scripts": {
         "start": "electron .",
@@ -19,7 +22,8 @@
     },
     "dependencies": {
         "@electron/remote": "^2.0.5",
-        "adm-zip": "^0.5.5"
+        "adm-zip": "^0.5.5",
+        "codemirror": "^5.65.2"
     },
     "build": {
         "appId": "com.electron.webkitty",
