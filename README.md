@@ -13,7 +13,8 @@ That's why  I built WebKitty, an all-in one tool for editing, testing and debugg
 
 - Customizable theme
 - Integrated preview
-- Simulation of different hosts and browsers
+- Google Chrome-style debugging tools
+- Emulation of different hosts and browsers
 - Fast file navigation
 - Cross platform
 
