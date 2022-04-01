@@ -26,7 +26,7 @@ function createWindow() {
         }
     });
 
-    const template = [
+    /*const template = [
       {
         label: 'Edit',
         submenu: [
@@ -63,9 +63,9 @@ function createWindow() {
             }
         ]
       }
-    ];
+    ];*/
 
-    //mainWindow.setMenuBarVisibility(false);
+    mainWindow.setMenuBarVisibility(false);
     mainWindow.loadFile("appwindow/index.html");
 
     require("@electron/remote/main").enable(mainWindow.webContents);
@@ -79,7 +79,7 @@ function createWindow() {
         save_project(data.path, data.data);
     });
 
-    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+    //Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
 app.whenReady().then(function() {

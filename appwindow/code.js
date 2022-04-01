@@ -195,14 +195,16 @@ var autosave = true;
     }
 });*/
 editor.on("change", function() {
-    console.log("Sending savedata", {
-        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-        data: editor.getValue()
-    })
-    ipcRenderer.send("project:save", {
-        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-        data: editor.getValue()
-    });
+    if (autosave) {
+        console.log("Sending savedata", {
+            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+            data: editor.getValue()
+        })
+        ipcRenderer.send("project:save", {
+            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+            data: editor.getValue()
+        });
+    }
 });
 
 document.querySelector("#menubutton").addEventListener("click", function() {
@@ -282,4 +284,16 @@ ipcRenderer.on("project:save", function() {
         path: projectdirectory + "/" + document.querySelector("#fileselect").value,
         data: editor.getValue()
     });
+});
+window.addEventListener("keydown", function(e) {
+    if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
+        console.log("Sending savedata", {
+            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+            data: editor.getValue()
+        })
+        ipcRenderer.send("project:save", {
+            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
+            data: editor.getValue()
+        });
+    }
 });
