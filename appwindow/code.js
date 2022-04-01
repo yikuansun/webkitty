@@ -61,7 +61,7 @@ function setProject(dir) {
     openFileInTextEditor(dir, "index.html");
 
     document.querySelector("#pagepreview").src = "file://" + dir + "/index.html";
-    document.querySelector("#addressbar").value = "file://" + dir + "/index.html";
+    document.querySelector("#addressbar").value = "file://" + dir.replaceAll("\\", "/") + "/index.html";
 }
 
 function saveTextFile(filepath, filecontents) {
