@@ -101,7 +101,7 @@ ipcMain.on("opensettingswin", function(data) {
         }
     });
 
-    //settingsWin.setMenuBarVisibility(false);
+    settingsWin.setMenuBarVisibility(false);
     settingsWin.loadFile(__dirname + "/appwindow/settings/index.html");
 
     require("@electron/remote/main").enable(settingsWin.webContents);
