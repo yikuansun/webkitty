@@ -18,6 +18,11 @@ let options = {
 let editor = CodeMirror(document.getElementById("cdm"), options);
 editor.setOption("mode", "htmlmixed");
 editor.setSize("100%", "calc(100vh - 54px)"); // codemirror doesn't repect height of parent element.
+function setCMHeight() {
+    editor.setSize("100%", `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 22}px)`);
+}
+setCMHeight();
+window.addEventListener("resize", setCMHeight);
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
@@ -182,6 +187,7 @@ function dragElement(element, direction)
             first.style.width = (md.firstWidth + delta.x) + "px";
             second.style.width = (md.secondWidth - delta.x) + "px";
         }
+        setCMHeight();
     }
 }
 
