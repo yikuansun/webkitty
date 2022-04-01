@@ -19,7 +19,7 @@ let editor = CodeMirror(document.getElementById("cdm"), options);
 editor.setOption("mode", "htmlmixed");
 editor.setSize("100%", "calc(100vh - 54px)"); // codemirror doesn't repect height of parent element.
 function setCMHeight() {
-    editor.setSize("100%", `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 22}px)`);
+    editor.setSize("100%", `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`);
 }
 setCMHeight();
 window.addEventListener("resize", setCMHeight);
