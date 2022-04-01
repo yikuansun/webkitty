@@ -14,8 +14,8 @@ function save_project(path, data) {
 
 function createWindow() {
     var mainWindow = new BrowserWindow({
-        width: 1200,
-        height: 900,
+        width: 1400,
+        height: 800,
         backgroundColor: "#222222",
         webPreferences: {
             nodeIntegration: true,
