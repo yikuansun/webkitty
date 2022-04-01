@@ -204,11 +204,11 @@ editor.on("change", function() {
         data: editor.getValue()
     });
 });
-/*
+
 document.querySelector("#menubutton").addEventListener("click", function() {
     document.querySelector("#landingscreen").style.display = "";
 });
-*/
+
 document.querySelector("#filemanagerbutton").addEventListener("click", function() {
     shell.openPath(projectdirectory);
 });
