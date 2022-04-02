@@ -47,6 +47,9 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
             case ".css":
                 editor.setOption("mode", "css");
                 break;
+            case ".xml":
+                editor.setOption("mode", "xml");
+                break;
             default:
                 editor.setOption("mode", "htmlmixed");
                 break;
