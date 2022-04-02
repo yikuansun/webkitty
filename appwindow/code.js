@@ -12,7 +12,8 @@ let options = {
   theme: currentTheme,
   //lineWrapping: true,
   autoCloseBrackets: true,
-  matchBrackets: true
+  matchBrackets: true,
+  indentUnit: 4
 };
 
 let editor = CodeMirror(document.getElementById("cdm"), options);
@@ -23,6 +24,12 @@ function setCMHeight() {
 }
 setCMHeight();
 window.addEventListener("resize", setCMHeight);
+editor.setOption("extraKeys", {
+    Tab: function(cm) {
+        var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+        cm.replaceSelection(spaces);
+    }
+});
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
