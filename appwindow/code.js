@@ -40,14 +40,16 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
       editor.setValue(data);
       if (typeof callback == "function") callback();
 
-      if (path.extname(rel_path) == ".js") {
-          editor.setOption("mode", "javascript");
-      }
-      else if (path.extname(rel_path) == ".css") {
-        editor.setOption("mode", "css");
-      }
-      else {
-          editor.setOption("mode", "htmlmixed");
+      switch (path.extname(rel_path)) {
+            case ".js":
+                editor.setOption("mode", "javascript");
+                break;
+            case ".css":
+                editor.setOption("mode", "css");
+                break;
+            default:
+                editor.setOption("mode", "htmlmixed");
+                break;
       }
     });
 }
