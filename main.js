@@ -2,16 +2,6 @@ const { app, BrowserWindow, ipcMain, Menu } = require("electron");
 require("@electron/remote/main").initialize();
 const fs = require("fs");
 
-/*function save_project(path, data) {
-    if (!data) return console.log("No data");
-
-    fs.writeFile(path, data, function (err) {
-      if (err) return console.log(err);
-
-      console.log("File saved");
-    });
-}*/
-
 function createWindow() {
     var mainWindow = new BrowserWindow({
         width: 1400,
@@ -22,48 +12,9 @@ function createWindow() {
             enableRemoteModule: true,
             contextIsolation: false,
             webviewTag: true,
-            //devTools: false
+            devTools: false
         }
     });
-
-    /*const template = [
-      {
-        label: 'Edit',
-        submenu: [
-            {
-                label: 'Save',
-                accelerator: 'CommandOrControl+S',
-                role: 'save',
-                click() {
-                    mainWindow.webContents.send("project:save");
-                }
-            },
-          {
-            label: 'Copy',
-            accelerator: 'CommandOrControl+C',
-            role: 'copy',
-          },
-          {
-            label: 'Paste',
-            accelerator: 'CommandOrControl+V',
-            role: 'paste',
-          },
-        ]
-      },
-      {
-        label: 'Debug',
-        submenu: [
-            {
-                label: 'Open DevTools',
-                accelerator: 'CommandOrControl+Shift+I',
-                role: 'devtools',
-                click() {
-                    mainWindow.openDevTools();
-                }
-            }
-        ]
-      }
-    ];*/
 
     mainWindow.setMenuBarVisibility(false);
     mainWindow.loadFile("appwindow/index.html");
@@ -73,13 +24,7 @@ function createWindow() {
     ipcMain.on("updateappsettings", function(data) {
         mainWindow.webContents.send("updateappsettings");
     });
-
-    /*ipcMain.on("project:save", function(event, data) {
-        console.log("GOT DATA", data)
-        save_project(data.path, data.data);
-    });*/
-
-    //Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+    
 }
 
 app.whenReady().then(function() {
