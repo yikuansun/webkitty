@@ -2,7 +2,7 @@
     "name": "webkitty",
     "productName": "WebKitty",
     "description": "Native web development IDE",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "author": {
         "name": "Yikuan Sun",
         "url": "https://yikuansun.github.io"
