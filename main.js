@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, Menu } = require("electron");
 require("@electron/remote/main").initialize();
 const fs = require("fs");
 
-function save_project(path, data) {
+/*function save_project(path, data) {
     if (!data) return console.log("No data");
 
     fs.writeFile(path, data, function (err) {
@@ -10,7 +10,7 @@ function save_project(path, data) {
 
       console.log("File saved");
     });
-}
+}*/
 
 function createWindow() {
     var mainWindow = new BrowserWindow({
@@ -22,7 +22,7 @@ function createWindow() {
             enableRemoteModule: true,
             contextIsolation: false,
             webviewTag: true,
-            devTools: false
+            //devTools: false
         }
     });
 
@@ -74,10 +74,10 @@ function createWindow() {
         mainWindow.webContents.send("updateappsettings");
     });
 
-    ipcMain.on("project:save", function(event, data) {
+    /*ipcMain.on("project:save", function(event, data) {
         console.log("GOT DATA", data)
         save_project(data.path, data.data);
-    });
+    });*/
 
     //Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }

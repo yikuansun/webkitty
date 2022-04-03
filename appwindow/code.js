@@ -224,14 +224,10 @@ var autosave = true;
 });*/
 editor.on("change", function() {
     if (autosave) {
-        console.log("Sending savedata", {
-            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-            data: editor.getValue()
-        })
-        ipcRenderer.send("project:save", {
-            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-            data: editor.getValue()
-        });
+        saveTextFile(
+            projectdirectory + "/" + document.querySelector("#fileselect").value,
+            editor.getValue()
+        );
     }
 });
 
@@ -304,24 +300,16 @@ ipcRenderer.on("updateappsettings", function(data) {
 });
 
 ipcRenderer.on("project:save", function() {
-    console.log("Sending savedata", {
-        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-        data: editor.getValue()
-    })
-    ipcRenderer.send("project:save", {
-        path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-        data: editor.getValue()
-    });
+    saveTextFile(
+        projectdirectory + "/" + document.querySelector("#fileselect").value,
+        editor.getValue()
+    );
 });
 window.addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
-        console.log("Sending savedata", {
-            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-            data: editor.getValue()
-        })
-        ipcRenderer.send("project:save", {
-            path: projectdirectory + "/" + document.querySelector("#fileselect").value,
-            data: editor.getValue()
-        });
+        saveTextFile(
+            projectdirectory + "/" + document.querySelector("#fileselect").value,
+            editor.getValue()
+        );
     }
 });
