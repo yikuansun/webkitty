@@ -1,6 +1,8 @@
-const { app, BrowserWindow, ipcMain, Menu } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu, nativeTheme } = require("electron");
 require("@electron/remote/main").initialize();
 const fs = require("fs");
+
+nativeTheme.themeSource = "dark";
 
 function createWindow() {
     var mainWindow = new BrowserWindow({
