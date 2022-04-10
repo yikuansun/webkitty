@@ -265,11 +265,11 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
     shell.openExternal(document.querySelector("#addressbar").value);
 });
-/*
+
 document.querySelector("#publishbutton").addEventListener("click", function() {
     shell.openExternal("https://pages.github.com/")
 });
-
+/*
 document.querySelector("#htmlbuilderlink").addEventListener("click", function() {
     shell.openExternal("https://github.com/yikuansun/html-builder");
 });
