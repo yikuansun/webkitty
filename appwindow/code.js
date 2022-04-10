@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { dialog, shell, BrowserWindow, app } = require("@electron/remote");
+const { dialog, shell, BrowserWindow, app, Menu } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
 
 let projectdirectory = "";
@@ -231,8 +231,25 @@ editor.on("change", function() {
     }
 });
 
+var smallmenu = Menu.buildFromTemplate([
+    {
+        label: "Close Project",
+        click: function() {
+            document.querySelector("#landingscreen").style.display = "";
+        }
+    },
+    {
+        label: "Settings",
+        click: function() {
+            ipcRenderer.send("opensettingswin");
+        }
+    }
+]);
 document.querySelector("#menubutton").addEventListener("click", function() {
-    document.querySelector("#landingscreen").style.display = "";
+    smallmenu.popup({
+        x: this.getBoundingClientRect().x,
+        y: this.getBoundingClientRect().y + this.getBoundingClientRect().height,
+    });
 });
 
 document.querySelector("#filemanagerbutton").addEventListener("click", function() {
