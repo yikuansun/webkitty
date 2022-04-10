@@ -233,6 +233,12 @@ editor.on("change", function() {
 
 var smallmenu = Menu.buildFromTemplate([
     {
+        label: "Manage Files",
+        click: function() {
+            shell.openExternal(projectdirectory);
+        }
+    },
+    {
         label: "Close Project",
         click: function() {
             document.querySelector("#landingscreen").style.display = "";
@@ -252,9 +258,9 @@ document.querySelector("#menubutton").addEventListener("click", function() {
     });
 });
 
-document.querySelector("#filemanagerbutton").addEventListener("click", function() {
+/*document.querySelector("#filemanagerbutton").addEventListener("click", function() {
     shell.openPath(projectdirectory);
-});
+});*/
 
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
     shell.openExternal(document.querySelector("#addressbar").value);
