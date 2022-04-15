@@ -235,7 +235,7 @@ var smallmenu = Menu.buildFromTemplate([
     {
         label: "Manage Files",
         click: function() {
-            shell.openExternal(projectdirectory);
+            shell.openPath(projectdirectory);
         }
     },
     {
