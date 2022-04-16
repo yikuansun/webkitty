@@ -158,12 +158,10 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
                 buttonRepr.submenu = submenu;
             }
             else {
+                var rel_path = (directory + "/" + file).split(basedir + "/")[1];
                 buttonRepr.click = new Function(`
-                console.log("${directory}");
-                console.log("${basedir}");
-                console.log("${file}");
-                console.log("${(directory + "/" + file).split(basedir + "/")[1]}")
-                document.querySelector("#fileselect").value = "${(directory + "/" + file).split(basedir + "/")[1]}";
+                document.querySelector("#fileselect").value = "${rel_path}";
+                openFileInTextEditor(projectdirectory, "${rel_path}");
                 `);
             }
             arr.push(buttonRepr);
