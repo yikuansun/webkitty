@@ -56,7 +56,7 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
       }
     });
 }
-
+/*
 function buildFileSelector(directory, optgroup, basedir) {
     var dircontents = fs.readdirSync(directory);
     optgroup.innerHTML = "";
@@ -75,10 +75,8 @@ function buildFileSelector(directory, optgroup, basedir) {
         }
     }
 };
-
+*/
 function setProject(dir) {
-    buildFileSelector(dir, document.querySelector("#fileselect"), dir);
-
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
 
@@ -147,9 +145,6 @@ document.querySelector("#fileselect").addEventListener("change", function() {
 });
 
 document.querySelector("#fileselect").addEventListener("mousedown", function(e) {
-    var selectedFile = this.value;
-    buildFileSelector(projectdirectory, document.querySelector("#fileselect"), projectdirectory);
-    document.querySelector("#fileselect").value = selectedFile;
     e.preventDefault();
     var template = [];
     var constructTemplate = function(arr, directory, basedir) {
