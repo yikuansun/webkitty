@@ -146,10 +146,31 @@ document.querySelector("#fileselect").addEventListener("change", function() {
     openFileInTextEditor(projectdirectory, this.value);
 });
 
-document.querySelector("#fileselect").addEventListener("mousedown", function() {
+document.querySelector("#fileselect").addEventListener("mousedown", function(e) {
     var selectedFile = this.value;
     buildFileSelector(projectdirectory, document.querySelector("#fileselect"), projectdirectory);
     document.querySelector("#fileselect").value = selectedFile;
+    e.preventDefault();
+    var template = [];
+    var constructTemplate = function(arr, directory) {
+        var dircontents = fs.readdirSync(directory);
+        for (var file of dircontents) {
+            if (file == ".DS_Store" || file == ".git") continue;
+            var buttonRepr = {label: file};
+            if (fs.lstatSync(directory + "/" + file).isDirectory()) {
+                var submenu = [];
+                constructTemplate(submenu, directory + "/" + file);
+                buttonRepr.submenu = submenu;
+            }
+            else {
+                buttonRepr.click = new Function(`document.querySelector("#fileselect").value = "${"amogus"}"`);
+            }
+            arr.push(buttonRepr);
+        }
+    };
+    constructTemplate(template, projectdirectory);
+    var fileMenu = Menu.buildFromTemplate(template);
+    fileMenu.popup();
 });
 /*
 document.querySelector("#savebutton").addEventListener("click", function() {
