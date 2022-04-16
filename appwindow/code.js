@@ -162,6 +162,7 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
                 buttonRepr.click = new Function(`
                 document.querySelector("#fileselect").value = "${rel_path}";
                 openFileInTextEditor(projectdirectory, "${rel_path}");
+                document.querySelector("#fileselect").scrollLeft = document.querySelector("#fileselect").scrollWidth;
                 `);
             }
             arr.push(buttonRepr);
@@ -169,7 +170,11 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
     };
     constructTemplate(template, projectdirectory, projectdirectory);
     var fileMenu = Menu.buildFromTemplate(template);
-    fileMenu.popup();
+    var xy = this.getBoundingClientRect();
+    fileMenu.popup({
+        x: Math.floor(xy.x),
+        y: Math.floor(xy.y + xy.height)
+    });
 });
 /*
 document.querySelector("#savebutton").addEventListener("click", function() {
