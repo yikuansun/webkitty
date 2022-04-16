@@ -50,6 +50,9 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
             case ".xml":
                 editor.setOption("mode", "xml");
                 break;
+            case ".json":
+                editor.setOption("mode", "javascript");
+                break;
             default:
                 editor.setOption("mode", "htmlmixed");
                 break;
