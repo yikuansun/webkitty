@@ -152,23 +152,29 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
     document.querySelector("#fileselect").value = selectedFile;
     e.preventDefault();
     var template = [];
-    var constructTemplate = function(arr, directory) {
+    var constructTemplate = function(arr, directory, basedir) {
         var dircontents = fs.readdirSync(directory);
         for (var file of dircontents) {
             if (file == ".DS_Store" || file == ".git") continue;
             var buttonRepr = {label: file};
             if (fs.lstatSync(directory + "/" + file).isDirectory()) {
                 var submenu = [];
-                constructTemplate(submenu, directory + "/" + file);
+                constructTemplate(submenu, directory + "/" + file, basedir);
                 buttonRepr.submenu = submenu;
             }
             else {
-                buttonRepr.click = new Function(`document.querySelector("#fileselect").value = "${"amogus"}"`);
+                buttonRepr.click = new Function(`
+                console.log("${directory}");
+                console.log("${basedir}");
+                console.log("${file}");
+                console.log("${(directory + "/" + file).split(basedir + "/")[1]}")
+                document.querySelector("#fileselect").value = "${(directory + "/" + file).split(basedir + "/")[1]}";
+                `);
             }
             arr.push(buttonRepr);
         }
     };
-    constructTemplate(template, projectdirectory);
+    constructTemplate(template, projectdirectory, projectdirectory);
     var fileMenu = Menu.buildFromTemplate(template);
     fileMenu.popup();
 });
