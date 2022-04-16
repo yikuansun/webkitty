@@ -57,28 +57,7 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
     });
 }
 
-function buildFileSelector(directory, optgroup, basedir) {
-    var dircontents = fs.readdirSync(directory);
-    optgroup.innerHTML = "";
-    for (var file of dircontents) {
-        if (file == ".DS_Store" || file == ".git") continue;
-        if (fs.lstatSync(directory + "/" + file).isDirectory()) {
-            var newOptGroup = document.createElement("optgroup");
-            newOptGroup.setAttribute("label", file);
-            optgroup.appendChild(newOptGroup);
-            buildFileSelector(directory + "/" + file, newOptGroup, basedir);
-        }
-        else {
-            var option = document.createElement("option");
-            option.innerText = (directory + "/" + file).split(basedir + "/")[1];
-            optgroup.appendChild(option);
-        }
-    }
-};
-
 function setProject(dir) {
-    buildFileSelector(dir, document.querySelector("#fileselect"), dir);
-
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
 
@@ -142,14 +121,37 @@ document.querySelector("#devtoolsbutton").addEventListener("click", function() {
     document.querySelector("#pagepreview").openDevTools();
 });
 
-document.querySelector("#fileselect").addEventListener("change", function() {
-    openFileInTextEditor(projectdirectory, this.value);
-});
-
-document.querySelector("#fileselect").addEventListener("mousedown", function() {
-    var selectedFile = this.value;
-    buildFileSelector(projectdirectory, document.querySelector("#fileselect"), projectdirectory);
-    document.querySelector("#fileselect").value = selectedFile;
+document.querySelector("#fileselect").addEventListener("mousedown", function(e) {
+    e.preventDefault();
+    var template = [];
+    var constructTemplate = function(arr, directory, basedir) {
+        var dircontents = fs.readdirSync(directory);
+        for (var file of dircontents) {
+            if (file == ".DS_Store" || file == ".git") continue;
+            var buttonRepr = {label: file};
+            if (fs.lstatSync(directory + "/" + file).isDirectory()) {
+                var submenu = [];
+                constructTemplate(submenu, directory + "/" + file, basedir);
+                buttonRepr.submenu = submenu;
+            }
+            else {
+                var rel_path = (directory + "/" + file).split(basedir + "/")[1];
+                buttonRepr.click = new Function(`
+                document.querySelector("#fileselect").value = "${rel_path}";
+                openFileInTextEditor(projectdirectory, "${rel_path}");
+                document.querySelector("#fileselect").scrollLeft = document.querySelector("#fileselect").scrollWidth;
+                `);
+            }
+            arr.push(buttonRepr);
+        }
+    };
+    constructTemplate(template, projectdirectory, projectdirectory);
+    var fileMenu = Menu.buildFromTemplate(template);
+    var xy = this.getBoundingClientRect();
+    fileMenu.popup({
+        x: Math.floor(xy.x),
+        y: Math.floor(xy.y + xy.height)
+    });
 });
 /*
 document.querySelector("#savebutton").addEventListener("click", function() {
