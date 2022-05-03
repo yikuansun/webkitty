@@ -53,6 +53,9 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
             case ".json":
                 editor.setOption("mode", "javascript");
                 break;
+            case ".md":
+                editor.setOption("mode", "markdown");
+                break;
             case ".py":
                 editor.setOption("mode", "python");
                 break;
