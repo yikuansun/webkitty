@@ -142,6 +142,7 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
             }
             else {
                 var rel_path = (directory + "/" + file).split(basedir + "/")[1];
+                if (rel_path == document.querySelector("#fileselect").value) buttonRepr.enabled = false;
                 buttonRepr.click = new Function(`
                 document.querySelector("#fileselect").value = "${rel_path}";
                 openFileInTextEditor(projectdirectory, "${rel_path}");
