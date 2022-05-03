@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { dialog, shell, BrowserWindow, app, Menu } = require("@electron/remote");
+const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
 
 let projectdirectory = "";
@@ -151,6 +151,10 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
                 openFileInTextEditor(projectdirectory, "${rel_path}");
                 document.querySelector("#fileselect").scrollLeft = document.querySelector("#fileselect").scrollWidth;
                 `);
+                var iconPath =  `${__dirname}/fileicons/${path.extname(file).replace(".", "")}.png`;
+                if (fs.existsSync(iconPath)) {
+                    buttonRepr.icon = nativeImage.createFromPath(iconPath).resize({ width: 12, height: 12 });
+                }
             }
             arr.push(buttonRepr);
         }
