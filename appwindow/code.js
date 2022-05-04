@@ -142,6 +142,7 @@ document.querySelector("#fileselect").addEventListener("mousedown", function(e) 
                 var submenu = [];
                 constructTemplate(submenu, directory + "/" + file, basedir);
                 buttonRepr.submenu = submenu;
+                buttonRepr.icon = nativeImage.createFromPath(`${__dirname}/fileicons/foldericon.png`).resize({ width: 12, height: 12 });
             }
             else {
                 var rel_path = (directory + "/" + file).split(basedir + "/")[1];
