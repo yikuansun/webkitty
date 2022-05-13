@@ -21,5 +21,5 @@ That's why  I built WebKitty, an all-in one tool for editing, testing and debugg
 
 ## Screenshots
 
-![App Screenshot](https://raw.githubusercontent.com/yikuansun/webkitty/master/screenshots/Screen%20Shot%202022-04-01%20at%204.40.07%20PM.png)
+![App Screenshot](https://raw.githubusercontent.com/yikuansun/webkitty/30ace57f6263da706dce163de56b8becee2da4a6/screenshots/Screen%20Shot%202022-05-12%20at%209.22.25%20PM.png)
 
