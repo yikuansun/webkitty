@@ -339,12 +339,6 @@ ipcRenderer.on("updateappsettings", function(data) {
     readSettings();
 });
 
-ipcRenderer.on("project:save", function() {
-    saveTextFile(
-        projectdirectory + "/" + document.querySelector("#fileselect").value,
-        editor.getValue()
-    );
-});
 window.addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
         saveTextFile(
