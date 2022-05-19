@@ -239,15 +239,15 @@ var autosave = true;
         document.querySelector("#savebutton").style.fontWeight = "";
     }
 });*/
-editor.on("change", function() {
+editor.on("change", function(cm, e) {
     if (autosave) {
         saveTextFile(
             projectdirectory + "/" + document.querySelector("#fileselect").value,
             editor.getValue()
         );
     }
-    else {
-        document.querySelector("#fileselect").style.fontWeight = "bold";
+    else if (e.origin != "setValue") {
+        document.querySelector("#fileselect").style.fontStyle = "italic";
     }
 });
 
@@ -348,6 +348,6 @@ window.addEventListener("keydown", function(e) {
             projectdirectory + "/" + document.querySelector("#fileselect").value,
             editor.getValue()
         );
-        document.querySelector("#fileselect").style.fontWeight = "";
+        document.querySelector("#fileselect").style.fontStyle = "";
     }
 });
