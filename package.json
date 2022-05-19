@@ -30,6 +30,9 @@
         "directories": {
             "buildResources": "resources"
         },
+        "extraFiles": [
+            "resources"
+        ],
         "dmg": {
             "window": {
                 "width": 512,
