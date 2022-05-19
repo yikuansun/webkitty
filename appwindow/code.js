@@ -246,6 +246,9 @@ editor.on("change", function() {
             editor.getValue()
         );
     }
+    else {
+        document.querySelector("#fileselect").style.fontWeight = "bold";
+    }
 });
 
 var smallmenu = Menu.buildFromTemplate([
@@ -345,5 +348,6 @@ window.addEventListener("keydown", function(e) {
             projectdirectory + "/" + document.querySelector("#fileselect").value,
             editor.getValue()
         );
+        document.querySelector("#fileselect").style.fontWeight = "";
     }
 });
