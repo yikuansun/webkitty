@@ -239,12 +239,15 @@ var autosave = true;
         document.querySelector("#savebutton").style.fontWeight = "";
     }
 });*/
-editor.on("change", function() {
+editor.on("change", function(cm, e) {
     if (autosave) {
         saveTextFile(
             projectdirectory + "/" + document.querySelector("#fileselect").value,
             editor.getValue()
         );
+    }
+    else if (e.origin != "setValue") {
+        document.querySelector("#fileselect").style.fontStyle = "italic";
     }
 });
 
@@ -339,17 +342,12 @@ ipcRenderer.on("updateappsettings", function(data) {
     readSettings();
 });
 
-ipcRenderer.on("project:save", function() {
-    saveTextFile(
-        projectdirectory + "/" + document.querySelector("#fileselect").value,
-        editor.getValue()
-    );
-});
 window.addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
         saveTextFile(
             projectdirectory + "/" + document.querySelector("#fileselect").value,
             editor.getValue()
         );
+        document.querySelector("#fileselect").style.fontStyle = "";
     }
 });
