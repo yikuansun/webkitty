@@ -33,7 +33,9 @@ editor.setOption("extraKeys", {
 editor.on("keyup", function (cm, e) {
     if (!cm.state.completionActive &&
         e.key.length == 1 &&
-        !e.ctrlKey) {
+        !e.ctrlKey &&
+        !e.metaKey &&
+        !e.altKey) {
         editor.showHint({completeSingle: false});
     }
 });
