@@ -272,9 +272,10 @@ var smallmenu = Menu.buildFromTemplate([
     }
 ]);
 document.querySelector("#menubutton").addEventListener("click", function() {
+    var xy = this.getBoundingClientRect();
     smallmenu.popup({
-        x: this.getBoundingClientRect().x,
-        y: this.getBoundingClientRect().y + this.getBoundingClientRect().height,
+        x: Math.floor(xy.x),
+        y: Math.floor(xy.y + xy.height)
     });
 });
 
