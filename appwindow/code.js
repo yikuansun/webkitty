@@ -30,6 +30,13 @@ editor.setOption("extraKeys", {
         cm.replaceSelection(spaces);
     }
 });
+editor.on("keyup", function (cm, e) {
+    if (!cm.state.completionActive &&
+        e.key == " " &&
+        e.ctrlKey) {
+        editor.showHint({completeSingle: false});
+    }
+});
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
