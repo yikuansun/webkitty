@@ -47,7 +47,7 @@ body {
 }
 
 #separator {
-    cursor: col-resize;
+    cursor: ew-resize;
     background-color: var(--ui-primary-color);
     background-repeat: no-repeat;
     background-position: center;
