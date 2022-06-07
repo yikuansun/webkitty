@@ -20,7 +20,6 @@ function createWindow() {
 
     mainWindow.setMenuBarVisibility(false);
     mainWindow.loadFile("appwindow/index.html");
-    mainWindow.setIcon("resources/icon.png");
 
     require("@electron/remote/main").enable(mainWindow.webContents);
 
