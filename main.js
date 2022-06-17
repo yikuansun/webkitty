@@ -15,7 +15,8 @@ function createWindow() {
             contextIsolation: false,
             webviewTag: true,
             devTools: false
-        }
+        },
+        icon: "appwindow/icon.png",
     });
 
     mainWindow.setMenuBarVisibility(false);
