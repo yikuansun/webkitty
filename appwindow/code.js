@@ -122,7 +122,7 @@ document.querySelector("#settingsbutton").addEventListener("click", function() {
 });
 
 document.querySelector("#aboutbutton").addEventListener("click", function() {
-    shell.openExternal("https://github.com/yikuansun/webkitty");
+    shell.openExternal("https://dartfling.vercel.app/product?pid=3");
 });
 
 document.querySelector("#addressbar").addEventListener("change", function() {
