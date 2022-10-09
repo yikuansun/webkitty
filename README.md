@@ -17,6 +17,7 @@ That's why  I built WebKitty, an all-in one tool for editing, testing and debugg
 - Emulation of different hosts and browsers
 - Fast file navigation
 - Cross platform
+- Code suggestions with Ctrl+Space
 
 
 ## Screenshots
