@@ -31,9 +31,7 @@ editor.setOption("extraKeys", {
     }
 });
 editor.on("keyup", function (cm, e) {
-    if (!cm.state.completionActive &&
-        e.key == " " &&
-        e.ctrlKey) {
+    if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".includes(e.key.toUpperCase()) && !e.ctrlKey) {
         editor.showHint({completeSingle: false});
     }
 });
