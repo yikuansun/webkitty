@@ -291,7 +291,14 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 });*/
 
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
-    shell.openExternal(document.querySelector("#addressbar").value);
+    var largeBrowserWindow = new BrowserWindow({
+        width: 1200,
+        height: 690,
+        //icon:
+    });
+
+    largeBrowserWindow.setMenuBarVisibility(false);
+    largeBrowserWindow.loadURL(document.querySelector("#addressbar").value);
 });
 
 document.querySelector("#publishbutton").addEventListener("click", function() {
