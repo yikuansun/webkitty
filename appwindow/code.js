@@ -294,7 +294,7 @@ document.querySelector("#openexternalbutton").addEventListener("click", function
     var largeBrowserWindow = new BrowserWindow({
         width: 1200,
         height: 690,
-        //icon:
+        icon: "browserIcon.png",
     });
 
     largeBrowserWindow.setMenuBarVisibility(false);
