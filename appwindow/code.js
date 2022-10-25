@@ -30,7 +30,7 @@ editor.setOption("extraKeys", {
         cm.replaceSelection(spaces);
     }
 });
-editor.on("keyup", function (cm, e) {
+editor.on("keydown", function (cm, e) {
     if ("abcdefghijklmnopqrstuvwxyz".split("").includes(e.key) && !e.ctrlKey) {
         editor.showHint({completeSingle: false});
     }
