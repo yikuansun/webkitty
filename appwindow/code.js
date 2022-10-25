@@ -5,7 +5,7 @@ const { ipcRenderer } = require("electron");
 
 let projectdirectory = "";
 
-let currentTheme = "base16-dark";
+let currentTheme = "seti";
 //GLOBAL EDITOR CONFIGURATION
 let options = {
   lineNumbers: true,
