@@ -5,7 +5,7 @@ const { ipcRenderer } = require("electron");
 
 let projectdirectory = "";
 
-let currentTheme = "base16-dark";
+let currentTheme = "yonce";
 //GLOBAL EDITOR CONFIGURATION
 let options = {
   lineNumbers: true,
@@ -13,7 +13,8 @@ let options = {
   //lineWrapping: true,
   autoCloseBrackets: true,
   matchBrackets: true,
-  indentUnit: 4
+  indentUnit: 4,
+  styleActiveLine: true,
 };
 
 let editor = CodeMirror(document.getElementById("cdm"), options);
