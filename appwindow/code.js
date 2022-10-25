@@ -13,7 +13,8 @@ let options = {
   //lineWrapping: true,
   autoCloseBrackets: true,
   matchBrackets: true,
-  indentUnit: 4
+  indentUnit: 4,
+  styleActiveLine: true,
 };
 
 let editor = CodeMirror(document.getElementById("cdm"), options);
