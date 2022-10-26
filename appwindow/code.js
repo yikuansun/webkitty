@@ -371,4 +371,8 @@ window.addEventListener("keydown", function(e) {
         );
         document.querySelector("#fileselect").style.fontStyle = "";
     }
+    else if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "r") {
+        e.preventDefault();
+        document.querySelector("#reloadbutton").click();
+    }
 });
