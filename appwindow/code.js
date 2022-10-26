@@ -31,11 +31,11 @@ editor.setOption("extraKeys", {
         cm.replaceSelection(spaces);
     }
 });
-editor.on("keydown", function (cm, e) {
+var autoCompleteFunc = function (cm, e) {
     if ("abcdefghijklmnopqrstuvwxyz".split("").includes(e.key) && !e.ctrlKey) {
         editor.showHint({completeSingle: false});
     }
-});
+};
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
@@ -319,6 +319,7 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         autosave: true,
         httpreferrer:  "",
         useragent: "",
+        autocomplete: true,
     }));
 }
 function readSettings() {
@@ -350,6 +351,12 @@ function readSettings() {
         document.querySelector("#pagepreview").setUserAgent(userSettings.useragent);
     }
     else document.querySelector("#pagepreview").setAttribute("useragent", userSettings.useragent);
+    if (userSettings.autocomplete) {
+        editor.on("keydown", autoCompleteFunc);
+    }
+    else {
+        editor.off("keydown", autoCompleteFunc);
+    }
 }
 readSettings();
 ipcRenderer.on("updateappsettings", function(data) {
