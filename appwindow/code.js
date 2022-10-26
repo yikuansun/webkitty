@@ -2,22 +2,28 @@ const fs = require("fs");
 const path = require("path");
 const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
+const { basicSetup } = require("codemirror");
+const { EditorView, keymap } = require("@codemirror/view");
+const { defaultKeymap } = require("@codemirror/commands");
 
 let projectdirectory = "";
 
 let currentTheme = "yonce";
 //GLOBAL EDITOR CONFIGURATION
 let options = {
-  lineNumbers: true,
+  /*lineNumbers: true,
   theme: currentTheme,
   //lineWrapping: true,
   autoCloseBrackets: true,
   matchBrackets: true,
   indentUnit: 4,
-  styleActiveLine: true,
+  styleActiveLine: true,*/
+  doc: "hi",
+  extensions: [basicSetup, keymap.of(defaultKeymap)],
+  parent: document.getElementById("cdm")
 };
 
-let editor = CodeMirror(document.getElementById("cdm"), options);
+let editor = new EditorView(options);
 editor.setOption("mode", "htmlmixed");
 editor.setSize("100%", "calc(100vh - 54px)"); // codemirror doesn't repect height of parent element.
 function setCMHeight() {
