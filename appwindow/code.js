@@ -5,6 +5,7 @@ const { ipcRenderer } = require("electron");
 const { basicSetup } = require("codemirror");
 const { EditorView, keymap } = require("@codemirror/view");
 const { defaultKeymap } = require("@codemirror/commands");
+const { oneDarkTheme } = require("@codemirror/theme-one-dark");
 
 let projectdirectory = "";
 
@@ -19,7 +20,7 @@ let options = {
   indentUnit: 4,
   styleActiveLine: true,*/
   doc: "hi",
-  extensions: [basicSetup, keymap.of(defaultKeymap)],
+  extensions: [basicSetup, keymap.of(defaultKeymap), oneDarkTheme],
   parent: document.getElementById("cdm")
 };
 

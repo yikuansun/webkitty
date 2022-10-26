@@ -21,6 +21,7 @@
         "electron-builder": "^22.14.5"
     },
     "dependencies": {
+        "@codemirror/theme-one-dark": "^6.1.0",
         "@electron/remote": "^2.0.5",
         "adm-zip": "^0.5.5",
         "codemirror": "^6.0.1"
