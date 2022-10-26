@@ -47,6 +47,9 @@
                     "path": "/Applications"
                 }
             ]
+        },
+        "mac": {
+            "target": "zip"
         }
     }
 }
