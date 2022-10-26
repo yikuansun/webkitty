@@ -226,3 +226,17 @@ input:focus, textarea:focus, select:focus, button:focus {
     height: 100%;
     width: 100%;
 }
+
+.CodeMirror-hints {
+    background-color: var(--ui-secondary-color)!important;
+    border: 0!important;
+}
+  
+.CodeMirror-hint {
+    color: var(--ui-primary-color)!important;
+}
+  
+li.CodeMirror-hint-active {
+    background-color: hsl(210deg, 100%, 42%)!important;
+    color: whitesmoke!important;
+}
