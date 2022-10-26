@@ -228,15 +228,15 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 .CodeMirror-hints {
-    background-color: var(--ui-secondary-color)!important;
+    background-color: #161616!important;
     border: 0!important;
 }
   
 .CodeMirror-hint {
-    color: var(--ui-primary-color)!important;
+    color: #f5f5f5!important;
 }
   
 li.CodeMirror-hint-active {
     background-color: hsl(210deg, 100%, 42%)!important;
-    color: whitesmoke!important;
+    color: white!important;
 }
