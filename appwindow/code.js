@@ -4,7 +4,7 @@ const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@elect
 const { ipcRenderer } = require("electron");
 const { basicSetup } = require("codemirror");
 const { EditorView, keymap, lineNumbers } = require("@codemirror/view");
-const { EditorState } = require("@codemirror/state");
+const { EditorState, Compartment } = require("@codemirror/state");
 const { defaultKeymap, history, historyKeymap, indentMore, indentLess } = require("@codemirror/commands");
 const { syntaxHighlighting, defaultHighlightStyle } = require("@codemirror/language");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
@@ -19,6 +19,7 @@ const { python } = require("@codemirror/lang-python"); // xd
 let projectdirectory = "";
 
 let currentTheme = "yonce";
+var updateListener = new Compartment();
 //GLOBAL EDITOR CONFIGURATION
 let options = {
   /*lineNumbers: true,
@@ -57,6 +58,7 @@ let options = {
     python(),
     syntaxHighlighting(defaultHighlightStyle),
     lineNumbers(),
+    updateListener.of(EditorView.updateListener.of(function() {})),
   ],
   parent: document.getElementById("cdm")
 };
@@ -291,16 +293,18 @@ var autosave = true;
         document.querySelector("#savebutton").style.fontWeight = "";
     }
 });*/
-editor.on("change", function(cm, e) {
-    if (autosave) {
-        saveTextFile(
-            projectdirectory + "/" + document.querySelector("#fileselect").value,
-            editor.getValue()
-        );
-    }
-    else if (e.origin != "setValue") {
-        document.querySelector("#fileselect").style.fontStyle = "italic";
-    }
+editor.dispatch({
+    effects: updateListener.reconfigure(EditorView.updateListener.of(function(e) {
+        if (autosave) {
+            saveTextFile(
+                projectdirectory + "/" + document.querySelector("#fileselect").value,
+                editor.state.doc.toString()
+            );
+        }
+        else {
+            document.querySelector("#fileselect").style.fontStyle = "italic";
+        }
+    }))
 });
 
 var smallmenu = Menu.buildFromTemplate([
@@ -406,7 +410,7 @@ window.addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
         saveTextFile(
             projectdirectory + "/" + document.querySelector("#fileselect").value,
-            editor.getValue()
+            editor.state.doc.toString()
         );
         document.querySelector("#fileselect").style.fontStyle = "";
     }
