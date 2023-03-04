@@ -23,32 +23,32 @@ var currentTheme = new Compartment();
 var updateListener = new Compartment();
 var languageMode = new Compartment();
 let options = {
-  doc: "hi",
-  extensions: [
-    basicSetup,
-    indentUnit.of(" ".repeat(4)),
-    keymap.of([
-        ...defaultKeymap,
-        ...historyKeymap,
-        {
-            key: "Tab",
-            preventDefault: true,
-            run: indentMore,
-        },
-        {
-            key: "Shift-Tab",
-            preventDefault: true,
-            run: indentLess,
-        },
-    ]),
-    currentTheme.of(materialDark),
-    history(),
-    languageMode.of(html()),
-    //syntaxHighlighting(defaultHighlightStyle),
-    lineNumbers(),
-    updateListener.of(EditorView.updateListener.of(function() {})),
-  ],
-  parent: document.getElementById("cdm")
+    doc: "hi",
+    extensions: [
+        basicSetup,
+        indentUnit.of(" ".repeat(4)),
+        keymap.of([
+            ...defaultKeymap,
+            ...historyKeymap,
+            {
+                key: "Tab",
+                preventDefault: true,
+                run: indentMore,
+            },
+            {
+                key: "Shift-Tab",
+                preventDefault: true,
+                run: indentLess,
+            },
+        ]),
+        currentTheme.of(materialDark),
+        history(),
+        languageMode.of(html()),
+        //syntaxHighlighting(defaultHighlightStyle),
+        lineNumbers(),
+        updateListener.of(EditorView.updateListener.of(function() {})),
+    ],
+    parent: document.getElementById("cdm")
 };
 
 let editor = new EditorView(options);
