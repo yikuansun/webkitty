@@ -5,6 +5,7 @@ const { ipcRenderer } = require("electron");
 const { basicSetup } = require("codemirror");
 const { EditorView, keymap } = require("@codemirror/view");
 const { defaultKeymap, history, historyKeymap } = require("@codemirror/commands");
+const { syntaxHighlighting, defaultHighlightStyle } = require("@codemirror/language");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
 const { javascript } = require("@codemirror/lang-javascript");
 const { html } = require("@codemirror/lang-html");
@@ -39,6 +40,7 @@ let options = {
     json(),
     xml(),
     python(),
+    syntaxHighlighting(defaultHighlightStyle),
   ],
   parent: document.getElementById("cdm")
 };
