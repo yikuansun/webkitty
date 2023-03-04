@@ -2,40 +2,61 @@ const fs = require("fs");
 const path = require("path");
 const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
+const { basicSetup } = require("codemirror");
+const { EditorView, keymap, lineNumbers } = require("@codemirror/view");
+const { EditorState, Compartment } = require("@codemirror/state");
+const { defaultKeymap, history, historyKeymap, indentMore, indentLess } = require("@codemirror/commands");
+const { syntaxHighlighting, defaultHighlightStyle, indentUnit } = require("@codemirror/language");
+const { javascript } = require("@codemirror/lang-javascript");
+const { html } = require("@codemirror/lang-html");
+const { css } = require("@codemirror/lang-css");
+const { markdown } = require("@codemirror/lang-markdown");
+const { json } = require("@codemirror/lang-json");
+const { xml } = require("@codemirror/lang-xml");
+const { python } = require("@codemirror/lang-python"); // xd
+const { basicDark } = require("cm6-theme-basic-dark");
+const { materialDark } = require("cm6-theme-material-dark");
 
 let projectdirectory = "";
 
-let currentTheme = "yonce";
-//GLOBAL EDITOR CONFIGURATION
+var currentTheme = new Compartment();
+var updateListener = new Compartment();
+var languageMode = new Compartment();
 let options = {
-  lineNumbers: true,
-  theme: currentTheme,
-  //lineWrapping: true,
-  autoCloseBrackets: true,
-  matchBrackets: true,
-  indentUnit: 4,
-  styleActiveLine: true,
+  doc: "hi",
+  extensions: [
+    basicSetup,
+    indentUnit.of(" ".repeat(4)),
+    keymap.of([
+        ...defaultKeymap,
+        ...historyKeymap,
+        {
+            key: "Tab",
+            preventDefault: true,
+            run: indentMore,
+        },
+        {
+            key: "Shift-Tab",
+            preventDefault: true,
+            run: indentLess,
+        },
+    ]),
+    currentTheme.of(materialDark),
+    history(),
+    languageMode.of(html()),
+    //syntaxHighlighting(defaultHighlightStyle),
+    lineNumbers(),
+    updateListener.of(EditorView.updateListener.of(function() {})),
+  ],
+  parent: document.getElementById("cdm")
 };
 
-let editor = CodeMirror(document.getElementById("cdm"), options);
-editor.setOption("mode", "htmlmixed");
-editor.setSize("100%", "calc(100vh - 54px)"); // codemirror doesn't repect height of parent element.
+let editor = new EditorView(options);
 function setCMHeight() {
-    editor.setSize("100%", `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`);
+    document.querySelector(".cm-editor").style.height = `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`;
 }
-setCMHeight();
+window.addEventListener("load", setCMHeight);
 window.addEventListener("resize", setCMHeight);
-editor.setOption("extraKeys", {
-    Tab: function(cm) {
-        var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
-        cm.replaceSelection(spaces);
-    }
-});
-var autoCompleteFunc = function (cm, e) {
-    if ("abcdefghijklmnopqrstuvwxyz".split("").includes(e.key) && !e.ctrlKey) {
-        editor.showHint({completeSingle: false});
-    }
-};
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
@@ -43,30 +64,46 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
     fs.readFile(path.join(dir, rel_path), 'utf8' , (err, data) => {
       if (err) return console.error(err);
 
-      editor.setValue(data);
+      editor.dispatch({
+        changes: { from: 0, to: editor.state.doc.length, insert: data }
+      });
       if (typeof callback == "function") callback();
 
       switch (path.extname(rel_path)) {
             case ".js":
-                editor.setOption("mode", "javascript");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(javascript()),
+                })
                 break;
             case ".css":
-                editor.setOption("mode", "css");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(css()),
+                })
                 break;
             case ".xml":
-                editor.setOption("mode", "xml");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(xml()),
+                })
                 break;
             case ".json":
-                editor.setOption("mode", "javascript");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(json()),
+                })
                 break;
             case ".md":
-                editor.setOption("mode", "markdown");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(markdown()),
+                })
                 break;
             case ".py":
-                editor.setOption("mode", "python");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(python()),
+                })
                 break;
             default:
-                editor.setOption("mode", "htmlmixed");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(html()),
+                })
                 break;
       }
     });
@@ -245,16 +282,20 @@ var autosave = true;
         document.querySelector("#savebutton").style.fontWeight = "";
     }
 });*/
-editor.on("change", function(cm, e) {
-    if (autosave) {
-        saveTextFile(
-            projectdirectory + "/" + document.querySelector("#fileselect").value,
-            editor.getValue()
-        );
-    }
-    else if (e.origin != "setValue") {
-        document.querySelector("#fileselect").style.fontStyle = "italic";
-    }
+editor.dispatch({
+    effects: updateListener.reconfigure(EditorView.updateListener.of(function(e) {
+        if (document.querySelector("#fileselect").value) {
+            if (autosave) {
+                saveTextFile(
+                    projectdirectory + "/" + document.querySelector("#fileselect").value,
+                    editor.state.doc.toString()
+                );
+            }
+            else {
+                document.querySelector("#fileselect").style.fontStyle = "italic";
+            }
+        }
+    }))
 });
 
 var smallmenu = Menu.buildFromTemplate([
@@ -319,7 +360,6 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         autosave: true,
         httpreferrer:  "",
         useragent: "",
-        autocomplete: true,
     }));
 }
 function readSettings() {
@@ -343,7 +383,7 @@ function readSettings() {
         document.querySelector("#rightsection").style.left = "";
         document.querySelector("#leftsection").style.bottom = "";
     }*/
-    document.querySelector(".CodeMirror").style.fontSize = `${userSettings.codefontsize}px`;
+    document.querySelector(".cm-editor").style.fontSize = `${userSettings.codefontsize}px`;
     autosave = userSettings.autosave;
     if (userSettings.httpreferrer) document.querySelector("#pagepreview").setAttribute("httpreferrer", userSettings.httpreferrer);
     else document.querySelector("#pagepreview").removeAttribute("httpreferrer");
@@ -351,12 +391,6 @@ function readSettings() {
         document.querySelector("#pagepreview").setUserAgent(userSettings.useragent);
     }
     else document.querySelector("#pagepreview").setAttribute("useragent", userSettings.useragent);
-    if (userSettings.autocomplete) {
-        editor.on("keydown", autoCompleteFunc);
-    }
-    else {
-        editor.off("keydown", autoCompleteFunc);
-    }
 }
 readSettings();
 ipcRenderer.on("updateappsettings", function(data) {
@@ -367,7 +401,7 @@ window.addEventListener("keydown", function(e) {
     if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "s") {
         saveTextFile(
             projectdirectory + "/" + document.querySelector("#fileselect").value,
-            editor.getValue()
+            editor.state.doc.toString()
         );
         document.querySelector("#fileselect").style.fontStyle = "";
     }

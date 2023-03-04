@@ -12,7 +12,6 @@ document.getElementById("codefontsize").value = currentSettings.codefontsize;
 document.getElementById("autosave").checked = currentSettings.autosave;
 document.getElementById("httpreferrer").value = currentSettings.httpreferrer;
 document.getElementById("useragent").value = currentSettings.useragent;
-document.getElementById("autocomplete").checked = currentSettings.autocomplete;
 
 function save_options() {
     fs.writeFileSync(userDataPath + "/settings.json", JSON.stringify({
@@ -23,8 +22,7 @@ function save_options() {
         codefontsize: parseInt(document.getElementById("codefontsize").value),
         autosave: document.getElementById("autosave").checked,
         httpreferrer: document.getElementById("httpreferrer").value,
-        useragent: document.getElementById("useragent").value,
-        autocomplete: document.getElementById("autocomplete").checked,
+        useragent: document.getElementById("useragent").value
     }));
 
     ipcRenderer.send("updateappsettings");
