@@ -20,6 +20,7 @@ let projectdirectory = "";
 
 let currentTheme = "yonce";
 var updateListener = new Compartment();
+var languageMode = new Compartment();
 //GLOBAL EDITOR CONFIGURATION
 let options = {
   /*lineNumbers: true,
@@ -49,13 +50,7 @@ let options = {
     ]),
     oneDarkTheme,
     history(),
-    javascript(),
-    html(),
-    css(),
-    markdown(),
-    json(),
-    xml(),
-    python(),
+    languageMode.of(html()),
     syntaxHighlighting(defaultHighlightStyle),
     lineNumbers(),
     updateListener.of(EditorView.updateListener.of(function() {})),
@@ -96,25 +91,39 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
 
       switch (path.extname(rel_path)) {
             case ".js":
-                editor.setOption("mode", "javascript");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(javascript()),
+                })
                 break;
             case ".css":
-                editor.setOption("mode", "css");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(css()),
+                })
                 break;
             case ".xml":
-                editor.setOption("mode", "xml");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(xml()),
+                })
                 break;
             case ".json":
-                editor.setOption("mode", "javascript");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(json()),
+                })
                 break;
             case ".md":
-                editor.setOption("mode", "markdown");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(markdown()),
+                })
                 break;
             case ".py":
-                editor.setOption("mode", "python");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(python()),
+                })
                 break;
             default:
-                editor.setOption("mode", "htmlmixed");
+                editor.dispatch({
+                    effects: languageMode.reconfigure(html()),
+                })
                 break;
       }
     });
