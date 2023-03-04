@@ -48,9 +48,9 @@ let options = {
 
 let editor = new EditorView(options);
 function setCMHeight() {
-    editor.contentHeight = `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`;
+    document.querySelector(".cm-editor").style.height = `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`;
 }
-setCMHeight();
+window.addEventListener("load", setCMHeight);
 window.addEventListener("resize", setCMHeight);
 /*editor.setOption("extraKeys", {
     Tab: function(cm) {
