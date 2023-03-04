@@ -4,7 +4,8 @@ const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@elect
 const { ipcRenderer } = require("electron");
 const { basicSetup } = require("codemirror");
 const { EditorView, keymap, lineNumbers } = require("@codemirror/view");
-const { defaultKeymap, history, historyKeymap } = require("@codemirror/commands");
+const { EditorState } = require("@codemirror/state");
+const { defaultKeymap, history, historyKeymap, indentMore, indentLess } = require("@codemirror/commands");
 const { syntaxHighlighting, defaultHighlightStyle } = require("@codemirror/language");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
 const { javascript } = require("@codemirror/lang-javascript");
@@ -30,7 +31,21 @@ let options = {
   doc: "hi",
   extensions: [
     basicSetup,
-    keymap.of([...defaultKeymap, ...historyKeymap]),
+    EditorState.tabSize.of(4), //?
+    keymap.of([
+        ...defaultKeymap,
+        ...historyKeymap,
+        {
+            key: "Tab",
+            preventDefault: true,
+            run: indentMore,
+        },
+        {
+            key: "Shift-Tab",
+            preventDefault: true,
+            run: indentLess,
+        },
+    ]),
     oneDarkTheme,
     history(),
     javascript(),
