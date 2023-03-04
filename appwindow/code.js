@@ -47,14 +47,12 @@ let options = {
 };
 
 let editor = new EditorView(options);
-editor.setOption("mode", "htmlmixed");
-editor.setSize("100%", "calc(100vh - 54px)"); // codemirror doesn't repect height of parent element.
 function setCMHeight() {
-    editor.setSize("100%", `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`);
+    editor.contentHeight = `calc(100vh - ${document.querySelector("#leftsection td").getBoundingClientRect().height + 28}px)`;
 }
 setCMHeight();
 window.addEventListener("resize", setCMHeight);
-editor.setOption("extraKeys", {
+/*editor.setOption("extraKeys", {
     Tab: function(cm) {
         var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
         cm.replaceSelection(spaces);
@@ -66,7 +64,7 @@ editor.on("keyup", function (cm, e) {
         e.ctrlKey) {
         editor.showHint({completeSingle: false});
     }
-});
+});*/
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
@@ -74,7 +72,9 @@ function openFileInTextEditor(dir, rel_path, callback = false) {
     fs.readFile(path.join(dir, rel_path), 'utf8' , (err, data) => {
       if (err) return console.error(err);
 
-      editor.setValue(data);
+      editor.dispatch({
+        changes: { from: 0, to: editor.state.doc.length, insert: data }
+      });
       if (typeof callback == "function") callback();
 
       switch (path.extname(rel_path)) {
