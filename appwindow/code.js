@@ -6,6 +6,13 @@ const { basicSetup } = require("codemirror");
 const { EditorView, keymap } = require("@codemirror/view");
 const { defaultKeymap, history, historyKeymap } = require("@codemirror/commands");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
+const { javascript } = require("@codemirror/lang-javascript");
+const { html } = require("@codemirror/lang-html");
+const { css } = require("@codemirror/lang-css");
+const { markdown } = require("@codemirror/lang-markdown");
+const { json } = require("@codemirror/lang-json");
+const { xml } = require("@codemirror/lang-xml");
+const { python } = require("@codemirror/lang-python"); // xd
 
 let projectdirectory = "";
 
@@ -25,6 +32,13 @@ let options = {
     keymap.of([...defaultKeymap, ...historyKeymap]),
     oneDarkTheme,
     history(),
+    javascript(),
+    html(),
+    css(),
+    markdown(),
+    json(),
+    xml(),
+    python(),
   ],
   parent: document.getElementById("cdm")
 };
