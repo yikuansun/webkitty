@@ -403,7 +403,7 @@ function readSettings() {
         document.querySelector("#rightsection").style.left = "";
         document.querySelector("#leftsection").style.bottom = "";
     }*/
-    document.querySelector(".CodeMirror").style.fontSize = `${userSettings.codefontsize}px`;
+    document.querySelector(".cm-editor").style.fontSize = `${userSettings.codefontsize}px`;
     autosave = userSettings.autosave;
     if (userSettings.httpreferrer) document.querySelector("#pagepreview").setAttribute("httpreferrer", userSettings.httpreferrer);
     else document.querySelector("#pagepreview").removeAttribute("httpreferrer");
