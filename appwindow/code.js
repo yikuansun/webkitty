@@ -15,6 +15,7 @@ const { json } = require("@codemirror/lang-json");
 const { xml } = require("@codemirror/lang-xml");
 const { python } = require("@codemirror/lang-python"); // xd
 const { basicDark } = require("cm6-theme-basic-dark");
+const { materialDark } = require("cm6-theme-material-dark");
 
 let projectdirectory = "";
 
@@ -48,7 +49,7 @@ let options = {
             run: indentLess,
         },
     ]),
-    currentTheme.of(basicDark),
+    currentTheme.of(materialDark),
     history(),
     languageMode.of(html()),
     //syntaxHighlighting(defaultHighlightStyle),
