@@ -31,6 +31,7 @@
         "@codemirror/theme-one-dark": "^6.1.0",
         "@electron/remote": "^2.0.5",
         "adm-zip": "^0.5.5",
+        "cm6-theme-basic-dark": "^0.2.0",
         "codemirror": "^6.0.1"
     },
     "build": {

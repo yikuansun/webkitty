@@ -7,7 +7,6 @@ const { EditorView, keymap, lineNumbers } = require("@codemirror/view");
 const { EditorState, Compartment } = require("@codemirror/state");
 const { defaultKeymap, history, historyKeymap, indentMore, indentLess } = require("@codemirror/commands");
 const { syntaxHighlighting, defaultHighlightStyle, indentUnit } = require("@codemirror/language");
-const { oneDarkTheme } = require("@codemirror/theme-one-dark");
 const { javascript } = require("@codemirror/lang-javascript");
 const { html } = require("@codemirror/lang-html");
 const { css } = require("@codemirror/lang-css");
@@ -15,10 +14,11 @@ const { markdown } = require("@codemirror/lang-markdown");
 const { json } = require("@codemirror/lang-json");
 const { xml } = require("@codemirror/lang-xml");
 const { python } = require("@codemirror/lang-python"); // xd
+const { basicDark } = require("cm6-theme-basic-dark");
 
 let projectdirectory = "";
 
-let currentTheme = "yonce";
+var currentTheme = new Compartment();
 var updateListener = new Compartment();
 var languageMode = new Compartment();
 //GLOBAL EDITOR CONFIGURATION
@@ -48,10 +48,10 @@ let options = {
             run: indentLess,
         },
     ]),
-    oneDarkTheme,
+    currentTheme.of(basicDark),
     history(),
     languageMode.of(html()),
-    syntaxHighlighting(defaultHighlightStyle),
+    //syntaxHighlighting(defaultHighlightStyle),
     lineNumbers(),
     updateListener.of(EditorView.updateListener.of(function() {})),
   ],
