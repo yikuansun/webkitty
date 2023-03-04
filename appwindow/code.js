@@ -409,4 +409,8 @@ window.addEventListener("keydown", function(e) {
         e.preventDefault();
         document.querySelector("#reloadbutton").click();
     }
+    else if ((process.platform == "darwin")?(e.metaKey && e.altKey && e.key.toLowerCase() == "i"):(e.ctrlKey && e.shiftKey && e.key.toLowerCase() == "i")) {
+        e.preventDefault();
+        document.querySelector("#devtoolsbutton").click();
+    }
 });
