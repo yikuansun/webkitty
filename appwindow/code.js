@@ -304,14 +304,16 @@ var autosave = true;
 });*/
 editor.dispatch({
     effects: updateListener.reconfigure(EditorView.updateListener.of(function(e) {
-        if (autosave) {
-            saveTextFile(
-                projectdirectory + "/" + document.querySelector("#fileselect").value,
-                editor.state.doc.toString()
-            );
-        }
-        else {
-            document.querySelector("#fileselect").style.fontStyle = "italic";
+        if (document.querySelector("#fileselect").value) {
+            if (autosave) {
+                saveTextFile(
+                    projectdirectory + "/" + document.querySelector("#fileselect").value,
+                    editor.state.doc.toString()
+                );
+            }
+            else {
+                document.querySelector("#fileselect").style.fontStyle = "italic";
+            }
         }
     }))
 });
