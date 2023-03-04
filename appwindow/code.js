@@ -6,7 +6,7 @@ const { basicSetup } = require("codemirror");
 const { EditorView, keymap, lineNumbers } = require("@codemirror/view");
 const { EditorState, Compartment } = require("@codemirror/state");
 const { defaultKeymap, history, historyKeymap, indentMore, indentLess } = require("@codemirror/commands");
-const { syntaxHighlighting, defaultHighlightStyle } = require("@codemirror/language");
+const { syntaxHighlighting, defaultHighlightStyle, indentUnit } = require("@codemirror/language");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
 const { javascript } = require("@codemirror/lang-javascript");
 const { html } = require("@codemirror/lang-html");
@@ -33,7 +33,7 @@ let options = {
   doc: "hi",
   extensions: [
     basicSetup,
-    EditorState.tabSize.of(4), //?
+    indentUnit.of(" ".repeat(4)),
     keymap.of([
         ...defaultKeymap,
         ...historyKeymap,
