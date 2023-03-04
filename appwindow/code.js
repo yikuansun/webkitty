@@ -22,15 +22,7 @@ let projectdirectory = "";
 var currentTheme = new Compartment();
 var updateListener = new Compartment();
 var languageMode = new Compartment();
-//GLOBAL EDITOR CONFIGURATION
 let options = {
-  /*lineNumbers: true,
-  theme: currentTheme,
-  //lineWrapping: true,
-  autoCloseBrackets: true,
-  matchBrackets: true,
-  indentUnit: 4,
-  styleActiveLine: true,*/
   doc: "hi",
   extensions: [
     basicSetup,
@@ -65,17 +57,6 @@ function setCMHeight() {
 }
 window.addEventListener("load", setCMHeight);
 window.addEventListener("resize", setCMHeight);
-/*editor.setOption("extraKeys", {
-    Tab: function(cm) {
-        var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
-        cm.replaceSelection(spaces);
-    }
-});
-editor.on("keydown", function (cm, e) {
-    if ("abcdefghijklmnopqrstuvwxyz".split("").includes(e.key) && !e.ctrlKey) {
-        editor.showHint({completeSingle: false});
-    }
-});*/
 
 function openFileInTextEditor(dir, rel_path, callback = false) {
     //let code = fs.readFileSync();
