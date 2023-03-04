@@ -4,7 +4,7 @@ const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@elect
 const { ipcRenderer } = require("electron");
 const { basicSetup } = require("codemirror");
 const { EditorView, keymap } = require("@codemirror/view");
-const { defaultKeymap } = require("@codemirror/commands");
+const { defaultKeymap, history, historyKeymap } = require("@codemirror/commands");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
 
 let projectdirectory = "";
@@ -20,7 +20,12 @@ let options = {
   indentUnit: 4,
   styleActiveLine: true,*/
   doc: "hi",
-  extensions: [basicSetup, keymap.of(defaultKeymap), oneDarkTheme],
+  extensions: [
+    basicSetup,
+    keymap.of([...defaultKeymap, ...historyKeymap]),
+    oneDarkTheme,
+    history(),
+  ],
   parent: document.getElementById("cdm")
 };
 
