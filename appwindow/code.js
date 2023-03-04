@@ -70,10 +70,8 @@ window.addEventListener("resize", setCMHeight);
         cm.replaceSelection(spaces);
     }
 });
-editor.on("keyup", function (cm, e) {
-    if (!cm.state.completionActive &&
-        e.key == " " &&
-        e.ctrlKey) {
+var autoCompleteFunc = function (cm, e) {
+    if ("abcdefghijklmnopqrstuvwxyz".split("").includes(e.key) && !e.ctrlKey) {
         editor.showHint({completeSingle: false});
     }
 });*/
@@ -380,6 +378,7 @@ if (!fs.existsSync(userDataPath + "/settings.json")) {
         autosave: true,
         httpreferrer:  "",
         useragent: "",
+        autocomplete: true,
     }));
 }
 function readSettings() {
@@ -411,6 +410,12 @@ function readSettings() {
         document.querySelector("#pagepreview").setUserAgent(userSettings.useragent);
     }
     else document.querySelector("#pagepreview").setAttribute("useragent", userSettings.useragent);
+    if (userSettings.autocomplete) {
+        editor.on("keydown", autoCompleteFunc);
+    }
+    else {
+        editor.off("keydown", autoCompleteFunc);
+    }
 }
 readSettings();
 ipcRenderer.on("updateappsettings", function(data) {
@@ -424,5 +429,9 @@ window.addEventListener("keydown", function(e) {
             editor.state.doc.toString()
         );
         document.querySelector("#fileselect").style.fontStyle = "";
+    }
+    else if (((process.platform == "darwin")?e.metaKey:e.ctrlKey) && e.key == "r") {
+        e.preventDefault();
+        document.querySelector("#reloadbutton").click();
     }
 });
