@@ -3,7 +3,7 @@ const path = require("path");
 const { dialog, shell, BrowserWindow, app, Menu, nativeImage } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
 const { basicSetup } = require("codemirror");
-const { EditorView, keymap } = require("@codemirror/view");
+const { EditorView, keymap, lineNumbers } = require("@codemirror/view");
 const { defaultKeymap, history, historyKeymap } = require("@codemirror/commands");
 const { syntaxHighlighting, defaultHighlightStyle } = require("@codemirror/language");
 const { oneDarkTheme } = require("@codemirror/theme-one-dark");
@@ -41,6 +41,7 @@ let options = {
     xml(),
     python(),
     syntaxHighlighting(defaultHighlightStyle),
+    lineNumbers(),
   ],
   parent: document.getElementById("cdm")
 };
