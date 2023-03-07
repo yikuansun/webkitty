@@ -40,6 +40,7 @@ ipcMain.on("opensettingswin", function(data) {
     var settingsWin = new BrowserWindow({
         height: 555,
         width: 400,
+        backgroundColor: "#222222",
         resizable: false,
         webPreferences: {
             devTools: false,
