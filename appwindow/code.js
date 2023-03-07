@@ -41,7 +41,7 @@ let options = {
                 run: indentLess,
             },
         ]),
-        currentTheme.of(materialDark),
+        currentTheme.of(basicDark),
         history(),
         languageMode.of(html()),
         //syntaxHighlighting(defaultHighlightStyle),
