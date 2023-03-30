@@ -28,7 +28,7 @@
         "@codemirror/lang-markdown": "^6.1.0",
         "@codemirror/lang-python": "^6.1.2",
         "@codemirror/lang-xml": "^6.0.2",
-        "@codemirror/theme-one-dark": "^6.1.0",
+        "@codemirror/theme-one-dark": "^6.1.1",
         "@electron/remote": "^2.0.5",
         "adm-zip": "^0.5.5",
         "cm6-theme-basic-dark": "^0.2.0",

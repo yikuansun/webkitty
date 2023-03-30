@@ -14,12 +14,14 @@ const { markdown } = require("@codemirror/lang-markdown");
 const { json } = require("@codemirror/lang-json");
 const { xml } = require("@codemirror/lang-xml");
 const { python } = require("@codemirror/lang-python"); // xd
-const { basicDark } = require("cm6-theme-basic-dark");
-const { materialDark } = require("cm6-theme-material-dark");
+const { basicDark, basicDarkTheme, basicDarkHighlightStyle } = require("cm6-theme-basic-dark");
+const { materialDark, materialDarkTheme, materialDarkHighlightStyle } = require("cm6-theme-material-dark");
+const { oneDark, oneDarkTheme, oneDarkHighlightStyle } = require("@codemirror/theme-one-dark");
 
 let projectdirectory = "";
 
 var currentTheme = new Compartment();
+var currentHighlightStyle = new Compartment();
 var updateListener = new Compartment();
 var languageMode = new Compartment();
 let options = {
@@ -41,10 +43,10 @@ let options = {
                 run: indentLess,
             },
         ]),
-        currentTheme.of(basicDark),
+        currentTheme.of(oneDarkTheme),
         history(),
         languageMode.of(html()),
-        //syntaxHighlighting(defaultHighlightStyle),
+        currentHighlightStyle.of(syntaxHighlighting(basicDarkHighlightStyle)),
         lineNumbers(),
         updateListener.of(EditorView.updateListener.of(function() {})),
     ],
