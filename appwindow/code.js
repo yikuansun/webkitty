@@ -17,8 +17,10 @@ const { python } = require("@codemirror/lang-python"); // xd
 const { basicDark, basicDarkTheme, basicDarkHighlightStyle } = require("cm6-theme-basic-dark");
 const { materialDark, materialDarkTheme, materialDarkHighlightStyle } = require("cm6-theme-material-dark");
 const { oneDark, oneDarkTheme, oneDarkHighlightStyle } = require("@codemirror/theme-one-dark");
+const LocalServer = require("./LocalServer");
 
 let projectdirectory = "";
+var serve = new LocalServer();
 
 var currentTheme = new Compartment();
 var currentHighlightStyle = new Compartment();
@@ -115,8 +117,10 @@ function setProject(dir) {
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
 
-    document.querySelector("#pagepreview").src = "file://" + dir + "/index.html";
-    document.querySelector("#addressbar").value = "file://" + dir.replaceAll("\\", "/") + "/index.html";
+    serve.dir = dir;
+
+    document.querySelector("#pagepreview").src = "http://localhost:1995/";
+    document.querySelector("#addressbar").value = "http://localhost:1995/";
 }
 
 function saveTextFile(filepath, filecontents) {
