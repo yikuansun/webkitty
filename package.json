@@ -33,7 +33,9 @@
         "adm-zip": "^0.5.5",
         "cm6-theme-basic-dark": "^0.2.0",
         "cm6-theme-material-dark": "^0.2.0",
-        "codemirror": "^6.0.1"
+        "codemirror": "^6.0.1",
+        "express": "^4.18.2",
+        "mime-types": "^2.1.35"
     },
     "build": {
         "appId": "com.electron.webkitty",

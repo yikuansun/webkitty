@@ -17,8 +17,10 @@ const { python } = require("@codemirror/lang-python"); // xd
 const { basicDark, basicDarkTheme, basicDarkHighlightStyle } = require("cm6-theme-basic-dark");
 const { materialDark, materialDarkTheme, materialDarkHighlightStyle } = require("cm6-theme-material-dark");
 const { oneDark, oneDarkTheme, oneDarkHighlightStyle } = require("@codemirror/theme-one-dark");
+const LocalServer = require("./LocalServer");
 
 let projectdirectory = "";
+var serve = new LocalServer();
 
 var currentTheme = new Compartment();
 var currentHighlightStyle = new Compartment();
@@ -115,8 +117,10 @@ function setProject(dir) {
     fileselect.value = "index.html";
     openFileInTextEditor(dir, "index.html");
 
-    document.querySelector("#pagepreview").src = "file://" + dir + "/index.html";
-    document.querySelector("#addressbar").value = "file://" + dir.replaceAll("\\", "/") + "/index.html";
+    serve.dir = dir;
+
+    document.querySelector("#pagepreview").src = `http://localhost:${serve.port}/`;
+    document.querySelector("#addressbar").value = `http://localhost:${serve.port}/`;
 }
 
 function saveTextFile(filepath, filecontents) {
@@ -333,14 +337,7 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 });*/
 
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
-    var largeBrowserWindow = new BrowserWindow({
-        width: 1200,
-        height: 690,
-        icon: "browserIcon.png",
-    });
-
-    largeBrowserWindow.setMenuBarVisibility(false);
-    largeBrowserWindow.loadURL(document.querySelector("#addressbar").value);
+    shell.openExternal(`http://localhost:${serve.port}`);
 });
 
 document.querySelector("#publishbutton").addEventListener("click", function() {
@@ -416,3 +413,10 @@ window.addEventListener("keydown", function(e) {
         document.querySelector("#devtoolsbutton").click();
     }
 });
+
+var time = new Date();
+if (time.getMonth() == 4 && time.getDate() == 1) {
+    for (var elem of document.querySelectorAll("*")) {
+        elem.style.fontFamily = "cursive";
+    }
+}
