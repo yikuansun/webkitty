@@ -15,13 +15,13 @@ class LocalServer {
         });
         this.app.get("*", (req, res) => {
             var filePath = path.join(this._dir, req.path);
-
-            if (req.path == "/") {
-                filePath = path.join(this._dir, "index.html");
-            }
         
             if (!fs.existsSync(filePath)) {
                 return res.status(404).send("<h1>404 error!!!</h1>Atlanta area code.");
+            }
+
+            if (fs.lstatSync(filePath).isDirectory()) {
+                filePath = path.join(filePath, "index.html");
             }
 
             var data = fs.readFileSync(filePath);
