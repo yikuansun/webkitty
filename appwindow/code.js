@@ -337,14 +337,7 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 });*/
 
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
-    var largeBrowserWindow = new BrowserWindow({
-        width: 1200,
-        height: 690,
-        icon: "browserIcon.png",
-    });
-
-    largeBrowserWindow.setMenuBarVisibility(false);
-    largeBrowserWindow.loadURL(document.querySelector("#addressbar").value);
+    shell.openExternal("http://localhost:1995");
 });
 
 document.querySelector("#publishbutton").addEventListener("click", function() {
