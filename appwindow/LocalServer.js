@@ -17,7 +17,10 @@ class LocalServer {
             var filePath = path.join(this._dir, req.path);
         
             if (!fs.existsSync(filePath)) {
-                return res.status(404).send("<h1>404 error!!!</h1>Atlanta area code.");
+                var document404 = "<h1>404 error!!!</h1>Atlanta area code.";
+                if (fs.existsSync(path.join(this._dir, "404.html"))) document404 = fs.readFileSync(path.join(this._dir, "404.html"));
+                res.set({ "content-type": "text/html" });
+                return res.status(404).send(document404);
             }
 
             if (fs.lstatSync(filePath).isDirectory()) {
