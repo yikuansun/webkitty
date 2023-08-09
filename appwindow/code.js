@@ -119,8 +119,8 @@ function setProject(dir) {
 
     serve.dir = dir;
 
-    document.querySelector("#pagepreview").src = "http://localhost:1995/";
-    document.querySelector("#addressbar").value = "http://localhost:1995/";
+    document.querySelector("#pagepreview").src = `http://localhost:${serve.port}/`;
+    document.querySelector("#addressbar").value = `http://localhost:${serve.port}/`;
 }
 
 function saveTextFile(filepath, filecontents) {
@@ -337,7 +337,7 @@ document.querySelector("#menubutton").addEventListener("click", function() {
 });*/
 
 document.querySelector("#openexternalbutton").addEventListener("click", function() {
-    shell.openExternal("http://localhost:1995");
+    shell.openExternal(`http://localhost:${serve.port}`);
 });
 
 document.querySelector("#publishbutton").addEventListener("click", function() {

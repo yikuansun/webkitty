@@ -37,6 +37,10 @@ class LocalServer {
     get dir() {
         return this._dir;
     }
+
+    get port() {
+        return this.server.address().port;
+    }
 }
 
 module.exports = LocalServer;
