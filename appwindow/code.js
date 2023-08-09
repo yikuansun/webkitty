@@ -413,3 +413,10 @@ window.addEventListener("keydown", function(e) {
         document.querySelector("#devtoolsbutton").click();
     }
 });
+
+var time = new Date();
+if (time.getMonth() == 4 && time.getDate() == 1) {
+    for (var elem of document.querySelectorAll("*")) {
+        elem.style.fontFamily = "cursive";
+    }
+}
