@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mime = require("mime-types");
+const fs = require("fs");
 
 class LocalServer {
     app;
