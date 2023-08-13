@@ -14,7 +14,7 @@ class LocalServer {
             console.log("http://localhost:1995");
         });
         this.app.get("*", (req, res) => {
-            var filePath = path.join(this._dir, req.path);
+            var filePath = path.join(this._dir, decodeURI(req.path));
         
             if (!fs.existsSync(filePath)) {
                 var document404 = "<h1>404 error!!!</h1>Atlanta area code.";
