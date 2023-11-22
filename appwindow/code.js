@@ -17,10 +17,10 @@ const { python } = require("@codemirror/lang-python"); // xd
 const { basicDark, basicDarkTheme, basicDarkHighlightStyle } = require("cm6-theme-basic-dark");
 const { materialDark, materialDarkTheme, materialDarkHighlightStyle } = require("cm6-theme-material-dark");
 const { oneDark, oneDarkTheme, oneDarkHighlightStyle } = require("@codemirror/theme-one-dark");
-const LocalServer = require("./LocalServer");
+const LocalServer = require("ezserv").server;
 
 let projectdirectory = "";
-var serve = new LocalServer();
+var serve = new LocalServer(0);
 
 var currentTheme = new Compartment();
 var currentHighlightStyle = new Compartment();
