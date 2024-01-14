@@ -164,7 +164,7 @@ document.querySelector("#settingsbutton").addEventListener("click", function() {
 });
 
 document.querySelector("#aboutbutton").addEventListener("click", function() {
-    shell.openExternal("https://dartfling.vercel.app/product?pid=3");
+    shell.openExternal("https://github.com/yikuansun/webkitty?tab=readme-ov-file#webkitty");
 });
 
 document.querySelector("#addressbar").addEventListener("change", function() {
